@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UIEvent - beforeUnload / unload</title>
+  </head>
+  <body>
+    <p>
+      Quando o usuário está para sair da sua página esse evento acontece ou
+      quando sai
+    </p>
+
+    <a href="http://google.com">Link</a>
+
+    <script>
+      window.addEventListener("beforeunload", (e) => {
+        const msg = "\o/";
+        e.returnValue = msg;
+      });
+
+      window.addEventListener("unload", () => {
+        console.log("Saiu da página");
+      });
+    </script>
+  </body>
+</html>

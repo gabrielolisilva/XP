@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MouseEvent - MouseDow / MouseUP</title>
+  </head>
+  <body>
+    <p id="a">Click aqui</p>
+  </body>
+
+  <script>
+    const pElement = document.getElementById("a");
+
+    pElement.addEventListener("mousedown", () => {
+      pElement.innerHTML = "Mouse pressionado";
+    });
+
+    pElement.addEventListener("mouseup", () => {
+      pElement.innerHTML = "Mouse solto";
+    });
+  </script>
+</html>
