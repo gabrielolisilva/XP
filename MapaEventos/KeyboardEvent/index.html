@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eventos do teclado</title>
+  </head>
+  <body>
+    <p>Exemplo de eventos com teclado</p>
+
+    <input type="text" name="texto" id="texto" />
+
+    <script>
+      const input = document.getElementById("texto");
+
+      input.addEventListener("keydown", keyDown);
+      input.addEventListener("keyup", keyUp);
+
+      function keyDown(e) {
+        e.target.style.background = "blue";
+      }
+
+      function keyUp(e) {
+        e.target.style.background = "white";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Duas teclas para atalhos</title>
+  </head>
+  <body>
+    <p>Pressione as teclas d & a juntos</p>
+
+    <script>
+      function runDoubleKeys(func, ...codes) {
+        const pressed = new Set();
+
+        document.addEventListener("keydown", (e) => {
+          pressed.add(e.code); //código da tecla pressionada
+
+          for (let code of codes) {
+            if (!pressed.has(code)) {
+              return;
+            }
+
+            pressed.clear();
+            func();
+          }
+        });
+
+        document.addEventListener("keyup", (e) => pressed.delete(e.code));
+      }
+
+      runDoubleKeys(() => alert("Combinação de duas teclas"), "KeyA", "KeyD");
+    </script>
+  </body>
+</html>
