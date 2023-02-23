@@ -9,6 +9,107 @@ data.then((resp) => {
   });
 });
 
+function renderInputs(data) {
+  /*   BEGGINING OF INPUTS DISPLAY  */
+
+  const inputsDiv = document.querySelector(".inputs");
+
+  const nameInput = document.createElement("input");
+  nameInput.type = "search";
+  nameInput.name = "nomeProduto";
+  nameInput.id = "nomeProduto";
+  const nameLabel = document.createElement("label");
+  nameLabel.innerHTML = "Nome: ";
+  nameLabel.appendChild(nameInput);
+
+  const selectBrand = document.createElement("select");
+  selectBrand.name = "brandSelect";
+  selectBrand.id = "brandList";
+  const brandOption = document.createElement("option");
+  brandOption.value = "todas";
+  brandOption.innerHTML = "todas";
+  brandOption.setAttribute("selected", true);
+  selectBrand.appendChild(brandOption);
+  const brandLabel = document.createElement("label");
+  brandLabel.innerHTML = "Marca: ";
+
+  brandLabel.appendChild(selectBrand);
+
+  const selectType = document.createElement("select");
+  selectType.name = "typeSelect";
+  selectType.id = "typeList";
+  const typeOption = document.createElement("option");
+  typeOption.value = "todos";
+  typeOption.innerHTML = "todos";
+  typeOption.setAttribute("selected", true);
+  selectType.appendChild(typeOption);
+  const typeLabel = document.createElement("label");
+  typeLabel.innerHTML = "Tipo: ";
+
+  typeLabel.appendChild(selectType);
+
+  inputsDiv.appendChild(nameLabel);
+  inputsDiv.appendChild(brandLabel);
+  inputsDiv.appendChild(typeLabel);
+
+  /*   BEGGINING OF OPTIONS DISPLAY INPUT  */
+
+  data.map((singleData) => {
+    const brandOption = document.createElement("option");
+    brandOption.value = singleData.brand;
+    brandOption.innerHTML = singleData.brand;
+
+    selectBrand.appendChild(brandOption);
+
+    const typeOption = document.createElement("option");
+    typeOption.value = singleData.product_type;
+    typeOption.innerHTML = singleData.product_type;
+
+    selectType.appendChild(typeOption);
+  });
+
+  const brandValuesArray = [];
+
+  document.querySelectorAll("#brandList > option").forEach((option) => {
+    if (brandValuesArray.includes(option.value)) option.remove();
+    else brandValuesArray.push(option.value);
+  });
+
+  const typeValuesArray = [];
+
+  document.querySelectorAll("#typeList > option").forEach((option) => {
+    if (typeValuesArray.includes(option.value)) option.remove();
+    else typeValuesArray.push(option.value);
+  });
+
+  /*   BEGGINING OF NAME FILTER SEARCH  */
+
+  const hideProducts = (valuesArray, inputValue) => {
+    valuesArray
+      .filter(
+        (singleData) =>
+          !singleData.textContent.toLowerCase().includes(inputValue)
+      )
+      .forEach((data) => data.classList.add("hidden"));
+  };
+
+  const showProducts = (valuesArray, inputValue) => {
+    valuesArray
+      .filter((singleData) =>
+        singleData.textContent.toLowerCase().includes(inputValue)
+      )
+      .forEach((data) => data.classList.remove("hidden"));
+  };
+
+  nameInput.addEventListener("input", (e) => {
+    const inputValue = e.target.value.trim().toLowerCase();
+    const valuesArray = Array.from(root.children);
+
+    hideProducts(valuesArray, inputValue);
+    showProducts(valuesArray, inputValue);
+  });
+}
+
 function renderData(data) {
   data.map((singleData) => {
     const newDiv = document.createElement("div");
@@ -61,73 +162,4 @@ function changePriceValue(value) {
   }
   const newValue = valueMultiplied.toString();
   return newValue.replace(".", ",");
-}
-
-function renderInputs(data) {
-  const inputsDiv = document.querySelector(".inputs");
-
-  const nameInput = document.createElement("input");
-  nameInput.type = "search";
-  nameInput.name = "nomeProduto";
-  nameInput.id = "nomeProduto";
-  const nameLabel = document.createElement("label");
-  nameLabel.innerHTML = "Nome: ";
-  nameLabel.appendChild(nameInput);
-
-  const selectBrand = document.createElement("select");
-  selectBrand.name = "brandSelect";
-  const brandOption = document.createElement("option");
-  brandOption.value = "todas";
-  brandOption.innerHTML = "todas";
-  brandOption.setAttribute("selected", true);
-  selectBrand.appendChild(brandOption);
-  const brandLabel = document.createElement("label");
-  brandLabel.innerHTML = "Marca: ";
-
-  brandLabel.appendChild(selectBrand);
-
-  const selectType = document.createElement("select");
-  selectType.name = "typeSelect";
-  const typeOption = document.createElement("option");
-  typeOption.value = "todos";
-  typeOption.innerHTML = "todos";
-  typeOption.setAttribute("selected", true);
-  selectType.appendChild(typeOption);
-  const typeLabel = document.createElement("label");
-  typeLabel.innerHTML = "Tipo: ";
-
-  typeLabel.appendChild(selectType);
-
-  inputsDiv.appendChild(nameLabel);
-  inputsDiv.appendChild(brandLabel);
-  inputsDiv.appendChild(typeLabel);
-
-  const hideProducts = (valuesArray, inputValue) => {
-    valuesArray
-      .filter(
-        (singleData) =>
-          !singleData.textContent.toLowerCase().includes(inputValue)
-      )
-      .forEach((data) => data.classList.add("hidden"));
-  };
-
-  const showProducts = (valuesArray, inputValue) => {
-    valuesArray
-      .filter((singleData) =>
-        singleData.textContent.toLowerCase().includes(inputValue)
-      )
-      .forEach((data) => data.classList.remove("hidden"));
-  };
-
-  nameInput.addEventListener("input", (e) => {
-    const inputValue = e.target.value.trim().toLowerCase();
-    const valuesArray = Array.from(root.children);
-
-    hideProducts(valuesArray, inputValue);
-    showProducts(valuesArray, inputValue);
-  });
-
-  data.map((singleData) => {
-    console.log(singleData.brand, singleData.product_type);
-  });
 }
