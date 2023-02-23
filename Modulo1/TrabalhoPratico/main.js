@@ -171,8 +171,28 @@ function renderData(data) {
     span2.classList.add("product-brand", "background-price");
     span2.innerHTML = `R$ ${changePriceValue(singleData.price)}`;
 
+    const span3 = document.createElement("span");
+    span3.classList.add("product-brand", "background-rating");
+    span3.innerHTML = singleData.rating;
+    const span4 = document.createElement("span");
+    span4.classList.add("product-brand", "background-category");
+    span4.innerHTML = singleData.category;
+    const span5 = document.createElement("span");
+    span5.classList.add("product-brand", "background-productType");
+    span5.innerHTML = singleData.product_type;
+
     divEnd.appendChild(span1);
     divEnd.appendChild(span2);
+
+    const divInfoAddition = document.createElement("div");
+    divInfoAddition.classList.add("moreProductInfoDiv", "divInfoAddHidden");
+    divInfoAddition.style.display = "none";
+
+    divInfoAddition.appendChild(span3);
+    divInfoAddition.appendChild(span4);
+    divInfoAddition.appendChild(span5);
+
+    divEnd.appendChild(divInfoAddition);
 
     section.appendChild(h1Element);
     section.appendChild(divEnd);
@@ -181,6 +201,15 @@ function renderData(data) {
     newDiv.appendChild(section);
 
     root.appendChild(newDiv);
+
+    newDiv.addEventListener("click", () => {
+      console.log(divInfoAddition.style.display);
+      if (divInfoAddition.style.display === "none") {
+        divInfoAddition.style.display = "flex";
+      } else {
+        divInfoAddition.style.display = "none";
+      }
+    });
   });
 }
 
