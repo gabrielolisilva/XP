@@ -71,7 +71,8 @@ function renderInputs(data) {
   const brandValuesArray = [];
 
   document.querySelectorAll("#brandList > option").forEach((option) => {
-    if (brandValuesArray.includes(option.value)) option.remove();
+    if (brandValuesArray.includes(option.value) || option.innerHTML == "")
+      option.remove();
     else brandValuesArray.push(option.value);
   });
 
@@ -107,6 +108,21 @@ function renderInputs(data) {
 
     hideProducts(valuesArray, inputValue);
     showProducts(valuesArray, inputValue);
+  });
+
+  /*   BEGGINING OF BRAND INPUT FILTER */
+
+  selectBrand.addEventListener("change", () => {
+    const currentValue = selectBrand.value.toLocaleLowerCase();
+
+    Array.from(root.children).filter((singleProduct) => {
+      if (currentValue == "todas") singleProduct.classList.remove("hidden");
+      else if (!singleProduct.textContent.includes(currentValue)) {
+        singleProduct.classList.add("hidden");
+      } else {
+        singleProduct.classList.remove("hidden");
+      }
+    });
   });
 }
 
