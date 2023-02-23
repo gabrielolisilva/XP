@@ -124,6 +124,22 @@ function renderInputs(data) {
       }
     });
   });
+
+  /*   BEGGINING OF TYPE INPUT FILTER */
+
+  selectType.addEventListener("change", () => {
+    const currentTypeValue = selectType.value.toLocaleLowerCase();
+
+    Array.from(root.children).filter((singleProduct) => {
+      console.log(singleProduct);
+      if (currentTypeValue == "todos") singleProduct.classList.remove("hidden");
+      else if (!singleProduct.textContent.includes(currentTypeValue)) {
+        singleProduct.classList.add("hidden");
+      } else {
+        singleProduct.classList.remove("hidden");
+      }
+    });
+  });
 }
 
 function renderData(data) {
