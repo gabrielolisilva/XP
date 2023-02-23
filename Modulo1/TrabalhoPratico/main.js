@@ -4,13 +4,13 @@ const data = fetch("http://makeup-api.herokuapp.com/api/v1/products.json");
 
 data.then((resp) => {
   resp.json().then((data) => {
+    renderInputs(data);
     renderData(data);
   });
 });
 
 function renderData(data) {
   data.map((singleData) => {
-    console.log(singleData);
     const newDiv = document.createElement("div");
     newDiv.classList.add("product");
 
@@ -61,4 +61,73 @@ function changePriceValue(value) {
   }
   const newValue = valueMultiplied.toString();
   return newValue.replace(".", ",");
+}
+
+function renderInputs(data) {
+  const inputsDiv = document.querySelector(".inputs");
+
+  const nameInput = document.createElement("input");
+  nameInput.type = "search";
+  nameInput.name = "nomeProduto";
+  nameInput.id = "nomeProduto";
+  const nameLabel = document.createElement("label");
+  nameLabel.innerHTML = "Nome: ";
+  nameLabel.appendChild(nameInput);
+
+  const selectBrand = document.createElement("select");
+  selectBrand.name = "brandSelect";
+  const brandOption = document.createElement("option");
+  brandOption.value = "todas";
+  brandOption.innerHTML = "todas";
+  brandOption.setAttribute("selected", true);
+  selectBrand.appendChild(brandOption);
+  const brandLabel = document.createElement("label");
+  brandLabel.innerHTML = "Marca: ";
+
+  brandLabel.appendChild(selectBrand);
+
+  const selectType = document.createElement("select");
+  selectType.name = "typeSelect";
+  const typeOption = document.createElement("option");
+  typeOption.value = "todos";
+  typeOption.innerHTML = "todos";
+  typeOption.setAttribute("selected", true);
+  selectType.appendChild(typeOption);
+  const typeLabel = document.createElement("label");
+  typeLabel.innerHTML = "Tipo: ";
+
+  typeLabel.appendChild(selectType);
+
+  inputsDiv.appendChild(nameLabel);
+  inputsDiv.appendChild(brandLabel);
+  inputsDiv.appendChild(typeLabel);
+
+  const hideProducts = (valuesArray, inputValue) => {
+    valuesArray
+      .filter(
+        (singleData) =>
+          !singleData.textContent.toLowerCase().includes(inputValue)
+      )
+      .forEach((data) => data.classList.add("hidden"));
+  };
+
+  const showProducts = (valuesArray, inputValue) => {
+    valuesArray
+      .filter((singleData) =>
+        singleData.textContent.toLowerCase().includes(inputValue)
+      )
+      .forEach((data) => data.classList.remove("hidden"));
+  };
+
+  nameInput.addEventListener("input", (e) => {
+    const inputValue = e.target.value.trim().toLowerCase();
+    const valuesArray = Array.from(root.children);
+
+    hideProducts(valuesArray, inputValue);
+    showProducts(valuesArray, inputValue);
+  });
+
+  data.map((singleData) => {
+    //console.log(singleData.brand, singleData.product_type);
+  });
 }
