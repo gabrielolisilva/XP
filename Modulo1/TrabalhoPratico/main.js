@@ -36,7 +36,7 @@ function renderData(data) {
     span1.innerHTML = singleData.brand;
     const span2 = document.createElement("span");
     span2.classList.add("product-brand", "background-price");
-    span2.innerHTML = `R$ ${formatPrices(singleData.price)}`;
+    span2.innerHTML = `R$ ${changePriceValue(singleData.price)}`;
 
     divEnd.appendChild(span1);
     divEnd.appendChild(span2);
@@ -51,8 +51,14 @@ function renderData(data) {
   });
 }
 
-function formatPrices(number) {
-  let formatedNumber = number.replace(".", ",");
-
-  return formatedNumber;
+function changePriceValue(value) {
+  value *= 5.5;
+  const valueMultiplied = value;
+  if (valueMultiplied % 1 === 0) {
+    valueMultiplied.toFixed(0);
+  } else {
+    valueMultiplied.toFixed(2);
+  }
+  const newValue = valueMultiplied.toString();
+  return newValue.replace(".", ",");
 }
