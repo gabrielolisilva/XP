@@ -128,6 +128,6 @@ function renderInputs(data) {
   });
 
   data.map((singleData) => {
-    //console.log(singleData.brand, singleData.product_type);
+    console.log(singleData.brand, singleData.product_type);
   });
 }
