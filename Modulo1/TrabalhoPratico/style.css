@@ -59,6 +59,12 @@ html {
 
 .background-brand {
   background-color: gray;
+  padding: 2px;
+}
+
+.background-price {
+  background-color: rgba(0, 47, 255, 0.623);
+  padding: 2px;
 }
 
 .moreProductInfoDiv {
