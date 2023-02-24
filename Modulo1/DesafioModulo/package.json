@@ -1,0 +1,14 @@
+{
+  "name": "desafiomodulo",
+  "version": "1.0.0",
+  "description": "Desafio do modulo1, criação de gráficos",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gabriel Silva",
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^4.2.1"
+  }
+}
