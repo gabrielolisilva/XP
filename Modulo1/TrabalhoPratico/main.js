@@ -215,11 +215,11 @@ function renderData(data) {
 
 function changePriceValue(value) {
   value *= 5.5;
-  const valueMultiplied = value;
+  let valueMultiplied = value;
   if (valueMultiplied % 1 === 0) {
-    valueMultiplied.toFixed(0);
+    valueMultiplied = valueMultiplied.toFixed(0);
   } else {
-    valueMultiplied.toFixed(2);
+    valueMultiplied = valueMultiplied.toFixed(2);
   }
   const newValue = valueMultiplied.toString();
   return newValue.replace(".", ",");
