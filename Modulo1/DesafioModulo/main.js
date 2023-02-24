@@ -71,6 +71,6 @@ function renderPizzaGraph(data) {
     },
   ];
 
-  const graphElement = document.querySelector("#pizzaGraph").getContext("2d");
-  new Chart(graphElement).Pie(dataGraph);
+  /* const graphElement = document.querySelector("#pizzaGraph").getContext("2d");
+  new Chart(graphElement).Pie(dataGraph); */
 }
