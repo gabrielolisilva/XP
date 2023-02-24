@@ -48,9 +48,40 @@ function renderInputs(data) {
 
   typeLabel.appendChild(selectType);
 
+  const filtersInput = document.createElement("select");
+  filtersInput.name = "filterInput";
+  filtersInput.id = "filtesInput";
+  const filterOption = document.createElement("option");
+  filterOption.value = "Filtros";
+  filterOption.innerHTML = "Filtros...";
+  filterOption.setAttribute("selected", true);
+  const filterOption1 = document.createElement("option");
+  filterOption1.value = "Melhor avaliados";
+  filterOption1.innerHTML = "Melhor avaliados";
+  const filterOption2 = document.createElement("option");
+  filterOption2.value = "Menores - Maiores $";
+  filterOption2.innerHTML = "Menores - Maiores $";
+  const filterOption3 = document.createElement("option");
+  filterOption3.value = "Maiores - Menores $";
+  filterOption3.innerHTML = "Maiores - Menores $";
+  const filterOption4 = document.createElement("option");
+  filterOption4.value = "A-Z";
+  filterOption4.innerHTML = "A-Z";
+  const filterOption5 = document.createElement("option");
+  filterOption5.value = "Z-A";
+  filterOption5.innerHTML = "Z-A";
+
+  filtersInput.appendChild(filterOption);
+  filtersInput.appendChild(filterOption1);
+  filtersInput.appendChild(filterOption2);
+  filtersInput.appendChild(filterOption3);
+  filtersInput.appendChild(filterOption4);
+  filtersInput.appendChild(filterOption5);
+
   inputsDiv.appendChild(nameLabel);
   inputsDiv.appendChild(brandLabel);
   inputsDiv.appendChild(typeLabel);
+  inputsDiv.appendChild(filtersInput);
 
   /*   BEGGINING OF OPTIONS DISPLAY INPUT  */
 
@@ -131,7 +162,6 @@ function renderInputs(data) {
     const currentTypeValue = selectType.value.toLocaleLowerCase();
 
     Array.from(root.children).filter((singleProduct) => {
-      console.log(singleProduct);
       if (currentTypeValue == "todos") singleProduct.classList.remove("hidden");
       else if (!singleProduct.textContent.includes(currentTypeValue)) {
         singleProduct.classList.add("hidden");
@@ -140,11 +170,81 @@ function renderInputs(data) {
       }
     });
   });
+
+  /*   BEGGINING OF ORDER INPUT FILTER */
+
+  filtersInput.addEventListener("change", () => {
+    const currentFilterValue = filtersInput.value.toLocaleLowerCase();
+
+    const dataArray = Array.from(data);
+
+    if (currentFilterValue === "melhor avaliados") {
+      const orderedArray = dataArray.sort(compareRating);
+      console.log(orderedArray);
+      renderData(orderedArray);
+    }
+
+    if (currentFilterValue === "menores - maiores $") {
+      const orderedArray = dataArray.sort(comparePrice);
+      console.log(orderedArray);
+      renderData(orderedArray);
+    }
+
+    if (currentFilterValue === "maiores - menores $") {
+      const orderedArray = dataArray.sort(comparePrice).reverse();
+      console.log(orderedArray);
+      renderData(orderedArray);
+    }
+
+    if (currentFilterValue === "a-z") {
+      const orderedArray = dataArray.sort(compareName);
+      console.log(orderedArray);
+      renderData(orderedArray);
+    }
+
+    if (currentFilterValue === "z-a") {
+      const orderedArray = dataArray.sort(compareName).reverse();
+      console.log(orderedArray);
+      renderData(orderedArray);
+    }
+
+    function comparePrice(a, b) {
+      if (a.price < b.price) {
+        return -1;
+      }
+      if (a.price > b.price) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+
+    function compareRating(a, b) {
+      if (a.rating > b.rating) {
+        return -1;
+      }
+      if (a.rating < b.rating) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+
+    function compareName(a, b) {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+  });
 }
 
 function renderData(data) {
   data.map((singleData) => {
-    console.log(singleData);
     const newDiv = document.createElement("div");
     newDiv.classList.add("product");
 
@@ -211,7 +311,6 @@ function renderData(data) {
     root.appendChild(newDiv);
 
     newDiv.addEventListener("click", () => {
-      console.log(divInfoAddition.style.display);
       if (divInfoAddition.style.display === "none") {
         divInfoAddition.style.display = "flex";
       } else {
