@@ -24,3 +24,5 @@ import Chart from "chart.js/auto";
     },
   });
 })();
+
+/* NPM RUN DEV */
