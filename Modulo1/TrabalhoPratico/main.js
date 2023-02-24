@@ -144,6 +144,7 @@ function renderInputs(data) {
 
 function renderData(data) {
   data.map((singleData) => {
+    console.log(singleData);
     const newDiv = document.createElement("div");
     newDiv.classList.add("product");
 
@@ -172,14 +173,20 @@ function renderData(data) {
     span2.innerHTML = `R$ ${changePriceValue(singleData.price)}`;
 
     const span3 = document.createElement("span");
-    span3.classList.add("product-brand", "background-rating");
-    span3.innerHTML = singleData.rating;
+    span3.classList.add("product-brand", "background-info");
+    span3.innerHTML = `Brand: ${singleData.brand}`;
     const span4 = document.createElement("span");
-    span4.classList.add("product-brand", "background-category");
-    span4.innerHTML = singleData.category;
+    span4.classList.add("product-brand", "background-info");
+    span4.innerHTML = `Price: ${singleData.price}`;
     const span5 = document.createElement("span");
-    span5.classList.add("product-brand", "background-productType");
-    span5.innerHTML = singleData.product_type;
+    span5.classList.add("product-brand", "background-info");
+    span5.innerHTML = `Rating: ${singleData.rating}`;
+    const span6 = document.createElement("span");
+    span6.classList.add("product-brand", "background-info");
+    span6.innerHTML = `Category: ${singleData.category}`;
+    const span7 = document.createElement("span");
+    span7.classList.add("product-brand", "background-info");
+    span7.innerHTML = `ProductType: ${singleData.product_type}`;
 
     divEnd.appendChild(span1);
     divEnd.appendChild(span2);
@@ -191,11 +198,12 @@ function renderData(data) {
     divInfoAddition.appendChild(span3);
     divInfoAddition.appendChild(span4);
     divInfoAddition.appendChild(span5);
-
-    divEnd.appendChild(divInfoAddition);
+    divInfoAddition.appendChild(span6);
+    divInfoAddition.appendChild(span7);
 
     section.appendChild(h1Element);
     section.appendChild(divEnd);
+    section.appendChild(divInfoAddition);
 
     newDiv.appendChild(figureSection);
     newDiv.appendChild(section);

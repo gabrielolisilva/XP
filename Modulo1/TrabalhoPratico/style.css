@@ -67,6 +67,11 @@ html {
   padding: 2px;
 }
 
+.background-info {
+  background-color: rgb(168, 168, 168);
+  margin: 2px 5px;
+}
+
 .moreProductInfoDiv {
   display: flex;
   flex-direction: column;
