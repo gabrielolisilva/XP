@@ -4,11 +4,9 @@
   "description": "Desafio do modulo1, criação de gráficos",
   "main": "main.js",
   "scripts": {
+    "start": "nodemon main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Gabriel Silva",
-  "license": "ISC",
-  "dependencies": {
-    "chart.js": "^4.2.1"
-  }
+  "license": "ISC"
 }
