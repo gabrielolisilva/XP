@@ -12,7 +12,7 @@ const p1 = Promise.race([
 
 const p2 = Promise.allSettled([
   new Promise((resolve) => setTimeout(resolve, 1200, "P1")),
-  new Promise((resolve) => setTimeout(resolve, 500, "P2")),
+  new Promise((resolve, reject) => setTimeout(reject, 500, "P2")),
   new Promise((resolve) => setTimeout(resolve, 2000, "P3")),
 ])
   .then((res) => console.log(res))
