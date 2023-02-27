@@ -36,21 +36,39 @@ form.addEventListener("submit", (e) => {
   countryInfo.then((resp) => {
     resp.json().then((data) => {
       console.log(data);
-      renderGraph(data);
+      renderGraph(data, dadosSelectValue);
       renderSingleInfos(data);
     });
   });
 });
 
-function renderGraph(data) {
+function renderGraph(data, dadoValue) {
+  let labelGraph = "";
+  let dataGraph;
+
+  if (dadoValue === "confirmados") {
+    labelGraph = "Número de Confirmados";
+    dataGraph = data.map((item) => item.Confirmed);
+  }
+
+  if (dadoValue === "mortes") {
+    labelGraph = "Número de Mortos";
+    dataGraph = data.map((item) => item.Deaths);
+  }
+
+  if (dadoValue === "recuperado") {
+    labelGraph = "Número de Recuperados";
+    dataGraph = data.map((item) => item.Recovered);
+  }
+
   new Chart(document.getElementById("acquisitions"), {
     type: "line",
     data: {
       labels: data.map((item) => item.Date),
       datasets: [
         {
-          label: "Acquisitions by year",
-          data: data.map((item) => item.Deaths),
+          label: labelGraph,
+          data: dataGraph,
         },
       ],
     },
