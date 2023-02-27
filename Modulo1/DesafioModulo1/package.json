@@ -4,8 +4,8 @@
   "description": "Desafio da criação de um gráficos através de uma API",
   "main": "main.js",
   "scripts": {
-    "dev": "parcel index.html",
-    "build": "parcel build index.html"
+    "dev": "parcel index1.html",
+    "build": "parcel build index1.html"
   },
   "devDependencies": {
     "parcel": "^2.6.2"

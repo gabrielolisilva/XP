@@ -90,6 +90,14 @@ function renderSingleInfos(data) {
     sumRecovered += currentRecoveredValue;
   }
 
+  const mediaConfirmed = sumConfirmed / data.length;
+  const mediaDeaths = sumDeaths / data.length;
+  const mediaRecovered = sumRecovered / data.length;
+
+  console.log(`Media confirmados ${mediaConfirmed}`);
+  console.log(`Media mortos ${mediaDeaths}`);
+  console.log(`Media Recuperados ${mediaRecovered}`);
+
   const totalConfirmedText = document.getElementById("confirmedText");
   totalConfirmedText.innerHTML = `${sumConfirmed}`;
 

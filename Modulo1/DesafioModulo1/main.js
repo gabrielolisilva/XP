@@ -4,9 +4,9 @@ const data = fetch("https://api.covid19api.com/summary");
 
 data.then((resp) => {
   resp.json().then((data) => {
-    console.log(data);
-    //renderData(data);
-    //renderPizzaGraph(data.Countries);
+    renderData(data);
+    renderPizzaGraph(data.Countries);
+    renderBarGraph(data.Countries);
   });
 });
 
@@ -71,4 +71,21 @@ function renderPizzaGraph(data) {
       },
     });
   })();
+}
+
+function renderBarGraph(data) {
+  const orderedArray = data.sort(comparePrice);
+
+  function comparePrice(a, b) {
+    if (a.price < b.price) {
+      return -1;
+    }
+    if (a.price > b.price) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  console.log(orderedArray);
 }
