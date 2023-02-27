@@ -1,5 +1,25 @@
 import Chart from "chart.js/auto";
 
+const apiData = fetch("https://api.covid19api.com/countries");
+
+apiData.then((resp) => {
+  resp.json().then((data) => {
+    console.log(data);
+    renderOptions(data);
+  });
+});
+
+function renderOptions(data) {
+  data.map((singleData) => {
+    const countrySelect = document.getElementById("paisSelect");
+    const countryOption = document.createElement("option");
+    countryOption.value = `${singleData.Country}`;
+    countryOption.innerHTML = `${singleData.Country}`;
+
+    countrySelect.appendChild(countryOption);
+  });
+}
+
 const form = document.querySelector(".filterForm");
 
 form.addEventListener("submit", (e) => {
@@ -9,28 +29,55 @@ form.addEventListener("submit", (e) => {
   const paisSelectValue = document.getElementById("paisSelect").value;
   const dadosSelectValue = document.getElementById("dadosSelect").value;
 
-  console.log(inicioDataValue, fimDataValue, paisSelectValue, dadosSelectValue);
+  const countryInfo = fetch(
+    `https://api.covid19api.com/country/${paisSelectValue}?from=${inicioDataValue}&to=${fimDataValue}`
+  );
+
+  countryInfo.then((resp) => {
+    resp.json().then((data) => {
+      console.log(data);
+      renderGraph(data);
+      renderSingleInfos(data);
+    });
+  });
 });
 
-const data = [
-  { year: 2010, count: 10 },
-  { year: 2011, count: 20 },
-  { year: 2012, count: 15 },
-  { year: 2013, count: 25 },
-  { year: 2014, count: 22 },
-  { year: 2015, count: 30 },
-  { year: 2016, count: 28 },
-];
+function renderGraph(data) {
+  new Chart(document.getElementById("acquisitions"), {
+    type: "line",
+    data: {
+      labels: data.map((item) => item.Date),
+      datasets: [
+        {
+          label: "Acquisitions by year",
+          data: data.map((item) => item.Deaths),
+        },
+      ],
+    },
+  });
+}
 
-new Chart(document.getElementById("acquisitions"), {
-  type: "line",
-  data: {
-    labels: data.map((row) => row.year),
-    datasets: [
-      {
-        label: "Acquisitions by year",
-        data: data.map((row) => row.count),
-      },
-    ],
-  },
-});
+function renderSingleInfos(data) {
+  let sumConfirmed = 0;
+  let sumDeaths = 0;
+  let sumRecovered = 0;
+
+  for (let i = 0; i < data.length; i++) {
+    let currentConfirmedValue = data[i].Confirmed;
+    let currentDeathsValue = data[i].Deaths;
+    let currentRecoveredValue = data[i].Recovered;
+
+    sumConfirmed += currentConfirmedValue;
+    sumDeaths += currentDeathsValue;
+    sumRecovered += currentRecoveredValue;
+  }
+
+  const totalConfirmedText = document.getElementById("confirmedText");
+  totalConfirmedText.innerHTML = `${sumConfirmed}`;
+
+  const totalDeathsText = document.getElementById("deathsText");
+  totalDeathsText.innerHTML = `${sumDeaths}`;
+
+  const totalRecoveredText = document.getElementById("recoveredText");
+  totalRecoveredText.innerHTML = `${sumRecovered}`;
+}

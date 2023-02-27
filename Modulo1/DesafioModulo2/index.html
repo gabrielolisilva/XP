@@ -16,16 +16,12 @@
           <h3>Data fim</h3>
           <input type="date" name="fimInput" id="fimInput" />
           <h3>País</h3>
-          <select name="paisSelect" id="paisSelect">
-            <option value="teste1">teste1</option>
-            <option value="teste2">teste2</option>
-            <option value="teste3">teste3</option>
-          </select>
+          <select name="paisSelect" id="paisSelect"></select>
           <h3>Dados</h3>
           <select name="dadosSelect" id="dadosSelect">
-            <option value="teste1">teste1</option>
-            <option value="teste2">teste2</option>
-            <option value="teste3">teste3</option>
+            <option value="confirmados">Número de confirmados</option>
+            <option value="mortes">Número de mortos</option>
+            <option value="recuperado">Número de Recuperados</option>
           </select>
           <button type="submit">Aplicar</button>
         </form>
@@ -36,15 +32,15 @@
         <div class="infoRightContainer">
           <div class="infoDiv">
             <h3>Total de confirmados</h3>
-            <p id="confirmadoText"></p>
+            <p id="confirmedText"></p>
           </div>
           <div class="infoDiv">
             <h3>Total de mortes</h3>
-            <p id="mortesText"></p>
+            <p id="deathsText"></p>
           </div>
           <div class="infoDiv">
             <h3>Total de recuperados</h3>
-            <p id="recuperadosText"></p>
+            <p id="recoveredText"></p>
           </div>
         </div>
       </div>
