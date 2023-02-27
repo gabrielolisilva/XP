@@ -1,7 +1,8 @@
 {
-  "name": "chartjs-example",
+  "name": "desafiomodulo",
   "version": "1.0.0",
-  "license": "MIT",
+  "description": "Desafio da criação de um gráficos através de uma API",
+  "main": "main.js",
   "scripts": {
     "dev": "parcel index.html",
     "build": "parcel build index.html"
@@ -12,5 +13,7 @@
   "dependencies": {
     "@cubejs-client/core": "^0.31.0",
     "chart.js": "^4.0.0"
-  }
+  },
+  "author": "Gabriel Silva",
+  "license": "ISC"
 }
