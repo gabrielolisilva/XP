@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Desafio parte 2</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="filterDiv">
+        <form class="filterForm">
+          <h3>Data Inicio</h3>
+          <input type="date" name="comecoInput" id="comecoInput" />
+          <h3>Data fim</h3>
+          <input type="date" name="fimInput" id="fimInput" />
+          <h3>País</h3>
+          <select name="paisSelect" id="paisSelect">
+            <option value="teste1">teste1</option>
+            <option value="teste2">teste2</option>
+            <option value="teste3">teste3</option>
+          </select>
+          <h3>Dados</h3>
+          <select name="dadosSelect" id="dadosSelect">
+            <option value="teste1">teste1</option>
+            <option value="teste2">teste2</option>
+            <option value="teste3">teste3</option>
+          </select>
+          <button type="submit">Aplicar</button>
+        </form>
+      </div>
+      <div class="graphDiv" style="width: 800px">
+        <canvas id="acquisitions"></canvas>
+
+        <div class="infoRightContainer">
+          <div class="infoDiv">
+            <h3>Total de confirmados</h3>
+            <p id="confirmadoText"></p>
+          </div>
+          <div class="infoDiv">
+            <h3>Total de mortes</h3>
+            <p id="mortesText"></p>
+          </div>
+          <div class="infoDiv">
+            <h3>Total de recuperados</h3>
+            <p id="recuperadosText"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

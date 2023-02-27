@@ -1,0 +1,19 @@
+.container {
+  margin: 0 50px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.infoRightContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.infoDiv {
+  background-color: rgb(199, 199, 199);
+}
+
+.infoDiv p {
+  text-align: center;
+}
