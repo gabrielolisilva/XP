@@ -74,18 +74,41 @@ function renderPizzaGraph(data) {
 }
 
 function renderBarGraph(data) {
-  const orderedArray = data.sort(comparePrice);
+  const dataArray = Array.from(data);
+
+  const filteredArray = dataArray.sort(comparePrice);
 
   function comparePrice(a, b) {
-    if (a.price < b.price) {
+    if (a.TotalDeaths > b.TotalDeaths) {
       return -1;
     }
-    if (a.price > b.price) {
+    if (a.TotalDeaths < b.TotalDeaths) {
       return 1;
     } else {
       return 0;
     }
   }
 
-  console.log(orderedArray);
+  console.log(filteredArray);
+
+  const top10DeathsArray = [];
+
+  for (let i = 0; i <= 10; i++) {
+    top10DeathsArray.push(filteredArray[i]);
+  }
+
+  console.log(top10DeathsArray);
+
+  new Chart(document.getElementById("barGraph"), {
+    type: "bar",
+    data: {
+      labels: top10DeathsArray.map((item) => item.Country),
+      datasets: [
+        {
+          label: "Total de mortes por país - top 10",
+          data: top10DeathsArray.map((item) => item.TotalDeaths),
+        },
+      ],
+    },
+  });
 }
