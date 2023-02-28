@@ -30,7 +30,7 @@ form.addEventListener("submit", (e) => {
   const dadosSelectValue = document.getElementById("dadosSelect").value;
 
   const countryInfo = fetch(
-    `https://api.covid19api.com/country/${paisSelectValue}?from=${inicioDataValue}&to=${fimDataValue}`
+    `https://api.covid19api.com/country/${paisSelectValue}?from=${inicioDataValue}T00:00:00Z&to=${fimDataValue}T00:00:00Z`
   );
 
   countryInfo.then((resp) => {
@@ -43,11 +43,15 @@ form.addEventListener("submit", (e) => {
 });
 
 function renderGraph(data, dadoValue) {
+  const firstValueArray = data[0];
   const lastValueArray = data[data.length - 1];
 
-  const confirmedMedia = lastValueArray.Confirmed / data.length;
-  const deathsMedia = lastValueArray.Deaths / data.length;
-  const recoveredMedia = lastValueArray.Recovered / data.length;
+  const confirmedMedia =
+    (lastValueArray.Confirmed - firstValueArray.Confirmed) / data.length;
+  const deathsMedia =
+    (lastValueArray.Deaths - firstValueArray.Deaths) / data.length;
+  const recoveredMedia =
+    (lastValueArray.Recovered - firstValueArray.Recovered) / data.length;
 
   console.log(confirmedMedia, deathsMedia, recoveredMedia);
 
@@ -96,14 +100,31 @@ function renderGraph(data, dadoValue) {
 }
 
 function renderSingleInfos(data) {
+  const firstValueArray = data[0];
   const lastValueArray = data[data.length - 1];
 
   const totalConfirmedText = document.getElementById("confirmedText");
-  totalConfirmedText.innerHTML = `${lastValueArray.Confirmed}`;
+  totalConfirmedText.innerHTML = `${
+    lastValueArray.Confirmed - firstValueArray.Confirmed
+  }`;
 
   const totalDeathsText = document.getElementById("deathsText");
-  totalDeathsText.innerHTML = `${lastValueArray.Deaths}`;
+  totalDeathsText.innerHTML = `${
+    lastValueArray.Deaths - firstValueArray.Deaths
+  }`;
 
   const totalRecoveredText = document.getElementById("recoveredText");
-  totalRecoveredText.innerHTML = `${lastValueArray.Recovered}`;
+  totalRecoveredText.innerHTML = `${
+    lastValueArray.Recovered - firstValueArray.Recovered
+  }`;
+
+  for (let a = 0, b = 1; b < data.length; a++, b++) {
+    console.log(
+      `Dia${b} - ${a} confirmados ${data[b].Confirmed - data[a].Confirmed}`
+    );
+    console.log(`Dia${b} - ${a} mortes ${data[b].Deaths - data[a].Deaths}`);
+    console.log(
+      `Dia${b} - ${a} recuperados ${data[b].Recovered - data[a].Recovered}`
+    );
+  }
 }
