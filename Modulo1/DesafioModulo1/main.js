@@ -22,7 +22,6 @@ function renderData(data) {
     let currentConfirmedValue = countriesArray[i].TotalConfirmed;
     let currentDeathValue = countriesArray[i].TotalDeaths;
     let currentRecoveryValue = countriesArray[i].TotalRecovered;
-
     totalConfirmed += currentConfirmedValue;
     TotalDeaths += currentDeathValue;
     TotalRecovered += currentRecoveryValue;

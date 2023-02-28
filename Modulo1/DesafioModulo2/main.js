@@ -43,22 +43,38 @@ form.addEventListener("submit", (e) => {
 });
 
 function renderGraph(data, dadoValue) {
+  const lastValueArray = data[data.length - 1];
+
+  const confirmedMedia = lastValueArray.Confirmed / data.length;
+  const deathsMedia = lastValueArray.Deaths / data.length;
+  const recoveredMedia = lastValueArray.Recovered / data.length;
+
+  console.log(confirmedMedia, deathsMedia, recoveredMedia);
+
   let labelGraph = "";
   let dataGraph;
+  let labelMediaGraph = "";
+  let mediaGraph;
 
   if (dadoValue === "confirmados") {
     labelGraph = "Número de Confirmados";
     dataGraph = data.map((item) => item.Confirmed);
+    labelMediaGraph = "Média de confirmados";
+    mediaGraph = confirmedMedia;
   }
 
   if (dadoValue === "mortes") {
     labelGraph = "Número de Mortos";
     dataGraph = data.map((item) => item.Deaths);
+    labelMediaGraph = "Média de mortos";
+    mediaGraph = deathsMedia;
   }
 
   if (dadoValue === "recuperado") {
     labelGraph = "Número de Recuperados";
     dataGraph = data.map((item) => item.Recovered);
+    labelMediaGraph = "Média de recuperados";
+    mediaGraph = recoveredMedia;
   }
 
   new Chart(document.getElementById("acquisitions"), {
@@ -70,40 +86,24 @@ function renderGraph(data, dadoValue) {
           label: labelGraph,
           data: dataGraph,
         },
+        {
+          label: labelMediaGraph,
+          data: mediaGraph,
+        },
       ],
     },
   });
 }
 
 function renderSingleInfos(data) {
-  let sumConfirmed = 0;
-  let sumDeaths = 0;
-  let sumRecovered = 0;
-
-  for (let i = 0; i < data.length; i++) {
-    let currentConfirmedValue = data[i].Confirmed;
-    let currentDeathsValue = data[i].Deaths;
-    let currentRecoveredValue = data[i].Recovered;
-
-    sumConfirmed += currentConfirmedValue;
-    sumDeaths += currentDeathsValue;
-    sumRecovered += currentRecoveredValue;
-  }
-
-  const mediaConfirmed = sumConfirmed / data.length;
-  const mediaDeaths = sumDeaths / data.length;
-  const mediaRecovered = sumRecovered / data.length;
-
-  console.log(`Media confirmados ${mediaConfirmed}`);
-  console.log(`Media mortos ${mediaDeaths}`);
-  console.log(`Media Recuperados ${mediaRecovered}`);
+  const lastValueArray = data[data.length - 1];
 
   const totalConfirmedText = document.getElementById("confirmedText");
-  totalConfirmedText.innerHTML = `${sumConfirmed}`;
+  totalConfirmedText.innerHTML = `${lastValueArray.Confirmed}`;
 
   const totalDeathsText = document.getElementById("deathsText");
-  totalDeathsText.innerHTML = `${sumDeaths}`;
+  totalDeathsText.innerHTML = `${lastValueArray.Deaths}`;
 
   const totalRecoveredText = document.getElementById("recoveredText");
-  totalRecoveredText.innerHTML = `${sumRecovered}`;
+  totalRecoveredText.innerHTML = `${lastValueArray.Recovered}`;
 }
