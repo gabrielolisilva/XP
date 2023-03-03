@@ -99,6 +99,8 @@ function renderInputs(data) {
     selectType.appendChild(typeOption);
   });
 
+  /*   REMOVE DUPLICATE OPTIONS OF THE FILTER */
+
   const brandValuesArray = [];
 
   document.querySelectorAll("#brandList > option").forEach((option) => {
