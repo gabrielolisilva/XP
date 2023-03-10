@@ -6,6 +6,27 @@ import FundoElement from "./FundoElement";
 const Content = () => {
   const [investmentsInfo, setinvestmentsInfo] = useState([]);
   const [reportsInfo, setreportsInfo] = useState([]);
+  const [reportAllData, setreportAllData] = useState([]);
+
+  function compare(a, b) {
+    if (a.month < b.month) {
+      return -1;
+    }
+    if (a.month > b.month) {
+      return 1;
+    }
+    return 0;
+  }
+
+  function compare1(a, b) {
+    if (a.investmentId < b.investmentId) {
+      return -1;
+    }
+    if (a.investmentId > b.investmentId) {
+      return 1;
+    }
+    return 0;
+  }
 
   useEffect(() => {
     const getDatas = async () => {
@@ -18,8 +39,11 @@ const Content = () => {
         );
         const investimentData = responseInvestment.data;
         const reportsData = responseReports.data;
+        reportsData.sort(compare);
+        reportsData.sort(compare1);
         setinvestmentsInfo(investimentData);
         setreportsInfo(reportsData);
+        setreportAllData(reportsData);
       } catch (error) {
         console.log(error);
       }
@@ -35,7 +59,7 @@ const Content = () => {
           item={item}
           key={item.id}
           reportsInfo={reportsInfo}
-          setreportsInfo={setreportsInfo}
+          reportAllData={reportAllData}
         />
       ))}
     </main>

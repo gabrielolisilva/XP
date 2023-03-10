@@ -1,0 +1,424 @@
+{
+  "percentageData": [
+    {
+      "idInvest": "3176856a-82cf-4ce9-8803-c65107c7ad5e",
+      "monthCount": 1,
+      "percentage": 100
+    },
+    {
+      "idInvest": "3176856a-82cf-4ce9-8803-c65107c7ad5e",
+      "monthCount": 1.2,
+      "percentage": 11
+    },
+    {
+      "idInvest": "3176856a-82cf-4ce9-8803-c65107c7ad5e",
+      "monthCount": 2.3,
+      "percentage": 9
+    },
+    {
+      "idInvest": "3176856a-82cf-4ce9-8803-c65107c7ad5e",
+      "monthCount": 3.4,
+      "percentage": 4
+    },
+    {
+      "idInvest": "3176856a-82cf-4ce9-8803-c65107c7ad5e",
+      "monthCount": 4.5,
+      "percentage": 6
+    },
+    {
+      "idInvest": "3176856a-82cf-4ce9-8803-c65107c7ad5e",
+      "monthCount": 5.6,
+      "percentage": -11
+    },
+    {
+      "idInvest": "3176856a-82cf-4ce9-8803-c65107c7ad5e",
+      "monthCount": 6.7,
+      "percentage": 10
+    },
+    {
+      "idInvest": "3176856a-82cf-4ce9-8803-c65107c7ad5e",
+      "monthCount": 7.8,
+      "percentage": 6
+    },
+    {
+      "idInvest": "3176856a-82cf-4ce9-8803-c65107c7ad5e",
+      "monthCount": 8.9,
+      "percentage": 7
+    },
+    {
+      "idInvest": "3176856a-82cf-4ce9-8803-c65107c7ad5e",
+      "monthCount": 9.1,
+      "percentage": 3
+    },
+    {
+      "idInvest": "3176856a-82cf-4ce9-8803-c65107c7ad5e",
+      "monthCount": 10.11,
+      "percentage": 8
+    },
+    {
+      "idInvest": "3176856a-82cf-4ce9-8803-c65107c7ad5e",
+      "monthCount": 11.12,
+      "percentage": -2
+    },
+    {
+      "idInvest": "bd94a5be-0ee9-457a-864b-63bd50e63dd7",
+      "monthCount": 1,
+      "percentage": 100
+    },
+    {
+      "idInvest": "bd94a5be-0ee9-457a-864b-63bd50e63dd7",
+      "monthCount": 1.2,
+      "percentage": 4
+    },
+    {
+      "idInvest": "bd94a5be-0ee9-457a-864b-63bd50e63dd7",
+      "monthCount": 2.3,
+      "percentage": 6
+    },
+    {
+      "idInvest": "bd94a5be-0ee9-457a-864b-63bd50e63dd7",
+      "monthCount": 3.4,
+      "percentage": 3
+    },
+    {
+      "idInvest": "bd94a5be-0ee9-457a-864b-63bd50e63dd7",
+      "monthCount": 4.5,
+      "percentage": 8
+    },
+    {
+      "idInvest": "bd94a5be-0ee9-457a-864b-63bd50e63dd7",
+      "monthCount": 5.6,
+      "percentage": 3
+    },
+    {
+      "idInvest": "bd94a5be-0ee9-457a-864b-63bd50e63dd7",
+      "monthCount": 6.7,
+      "percentage": 1
+    },
+    {
+      "idInvest": "bd94a5be-0ee9-457a-864b-63bd50e63dd7",
+      "monthCount": 7.8,
+      "percentage": 3
+    },
+    {
+      "idInvest": "bd94a5be-0ee9-457a-864b-63bd50e63dd7",
+      "monthCount": 8.9,
+      "percentage": -4
+    },
+    {
+      "idInvest": "bd94a5be-0ee9-457a-864b-63bd50e63dd7",
+      "monthCount": 9.1,
+      "percentage": -10
+    },
+    {
+      "idInvest": "bd94a5be-0ee9-457a-864b-63bd50e63dd7",
+      "monthCount": 10.11,
+      "percentage": 4
+    },
+    {
+      "idInvest": "bd94a5be-0ee9-457a-864b-63bd50e63dd7",
+      "monthCount": 11.12,
+      "percentage": 8
+    },
+    {
+      "idInvest": "9ba5ccdb-7f4c-4920-ac8a-19fb66eb816c",
+      "monthCount": 1,
+      "percentage": 100
+    },
+    {
+      "idInvest": "9ba5ccdb-7f4c-4920-ac8a-19fb66eb816c",
+      "monthCount": 1.2,
+      "percentage": -9
+    },
+    {
+      "idInvest": "9ba5ccdb-7f4c-4920-ac8a-19fb66eb816c",
+      "monthCount": 2.3,
+      "percentage": -7
+    },
+    {
+      "idInvest": "9ba5ccdb-7f4c-4920-ac8a-19fb66eb816c",
+      "monthCount": 3.4,
+      "percentage": 6
+    },
+    {
+      "idInvest": "9ba5ccdb-7f4c-4920-ac8a-19fb66eb816c",
+      "monthCount": 4.5,
+      "percentage": 6
+    },
+    {
+      "idInvest": "9ba5ccdb-7f4c-4920-ac8a-19fb66eb816c",
+      "monthCount": 5.6,
+      "percentage": 4
+    },
+    {
+      "idInvest": "9ba5ccdb-7f4c-4920-ac8a-19fb66eb816c",
+      "monthCount": 6.7,
+      "percentage": -10
+    },
+    {
+      "idInvest": "9ba5ccdb-7f4c-4920-ac8a-19fb66eb816c",
+      "monthCount": 7.8,
+      "percentage": 7
+    },
+    {
+      "idInvest": "9ba5ccdb-7f4c-4920-ac8a-19fb66eb816c",
+      "monthCount": 8.9,
+      "percentage": 9
+    },
+    {
+      "idInvest": "9ba5ccdb-7f4c-4920-ac8a-19fb66eb816c",
+      "monthCount": 9.1,
+      "percentage": 9
+    },
+    {
+      "idInvest": "9ba5ccdb-7f4c-4920-ac8a-19fb66eb816c",
+      "monthCount": 10.11,
+      "percentage": -8
+    },
+    {
+      "idInvest": "9ba5ccdb-7f4c-4920-ac8a-19fb66eb816c",
+      "monthCount": 11.12,
+      "percentage": -8
+    },
+    {
+      "idInvest": "b23360da-51a2-4943-a99e-8f75e77fd815",
+      "monthCount": 1,
+      "percentage": 100
+    },
+    {
+      "idInvest": "b23360da-51a2-4943-a99e-8f75e77fd815",
+      "monthCount": 1.2,
+      "percentage": -4
+    },
+    {
+      "idInvest": "b23360da-51a2-4943-a99e-8f75e77fd815",
+      "monthCount": 2.3,
+      "percentage": 1
+    },
+    {
+      "idInvest": "b23360da-51a2-4943-a99e-8f75e77fd815",
+      "monthCount": 3.4,
+      "percentage": 9
+    },
+    {
+      "idInvest": "b23360da-51a2-4943-a99e-8f75e77fd815",
+      "monthCount": 4.5,
+      "percentage": -5
+    },
+    {
+      "idInvest": "b23360da-51a2-4943-a99e-8f75e77fd815",
+      "monthCount": 5.6,
+      "percentage": -11
+    },
+    {
+      "idInvest": "b23360da-51a2-4943-a99e-8f75e77fd815",
+      "monthCount": 6.7,
+      "percentage": -9
+    },
+    {
+      "idInvest": "b23360da-51a2-4943-a99e-8f75e77fd815",
+      "monthCount": 7.8,
+      "percentage": 7
+    },
+    {
+      "idInvest": "b23360da-51a2-4943-a99e-8f75e77fd815",
+      "monthCount": 8.9,
+      "percentage": 7
+    },
+    {
+      "idInvest": "b23360da-51a2-4943-a99e-8f75e77fd815",
+      "monthCount": 9.1,
+      "percentage": 3
+    },
+    {
+      "idInvest": "b23360da-51a2-4943-a99e-8f75e77fd815",
+      "monthCount": 10.11,
+      "percentage": -10
+    },
+    {
+      "idInvest": "b23360da-51a2-4943-a99e-8f75e77fd815",
+      "monthCount": 11.12,
+      "percentage": 2
+    },
+    {
+      "idInvest": "5f1cb644-fdea-40b9-afe8-c86f1fd3ec54",
+      "monthCount": 1,
+      "percentage": 100
+    },
+    {
+      "idInvest": "5f1cb644-fdea-40b9-afe8-c86f1fd3ec54",
+      "monthCount": 1.2,
+      "percentage": -7
+    },
+    {
+      "idInvest": "5f1cb644-fdea-40b9-afe8-c86f1fd3ec54",
+      "monthCount": 2.3,
+      "percentage": 1
+    },
+    {
+      "idInvest": "5f1cb644-fdea-40b9-afe8-c86f1fd3ec54",
+      "monthCount": 3.4,
+      "percentage": -2
+    },
+    {
+      "idInvest": "5f1cb644-fdea-40b9-afe8-c86f1fd3ec54",
+      "monthCount": 4.5,
+      "percentage": 4
+    },
+    {
+      "idInvest": "5f1cb644-fdea-40b9-afe8-c86f1fd3ec54",
+      "monthCount": 5.6,
+      "percentage": 9
+    },
+    {
+      "idInvest": "5f1cb644-fdea-40b9-afe8-c86f1fd3ec54",
+      "monthCount": 6.7,
+      "percentage": 7
+    },
+    {
+      "idInvest": "5f1cb644-fdea-40b9-afe8-c86f1fd3ec54",
+      "monthCount": 7.8,
+      "percentage": -10
+    },
+    {
+      "idInvest": "5f1cb644-fdea-40b9-afe8-c86f1fd3ec54",
+      "monthCount": 8.9,
+      "percentage": -2
+    },
+    {
+      "idInvest": "5f1cb644-fdea-40b9-afe8-c86f1fd3ec54",
+      "monthCount": 9.1,
+      "percentage": -3
+    },
+    {
+      "idInvest": "5f1cb644-fdea-40b9-afe8-c86f1fd3ec54",
+      "monthCount": 10.11,
+      "percentage": 5
+    },
+    {
+      "idInvest": "5f1cb644-fdea-40b9-afe8-c86f1fd3ec54",
+      "monthCount": 11.12,
+      "percentage": -4
+    },
+    {
+      "idInvest": "2e93b253-f4ed-41eb-a2b6-9d5082b07f52",
+      "monthCount": 1,
+      "percentage": 100
+    },
+    {
+      "idInvest": "2e93b253-f4ed-41eb-a2b6-9d5082b07f52",
+      "monthCount": 1.2,
+      "percentage": 4
+    },
+    {
+      "idInvest": "2e93b253-f4ed-41eb-a2b6-9d5082b07f52",
+      "monthCount": 2.3,
+      "percentage": 11
+    },
+    {
+      "idInvest": "2e93b253-f4ed-41eb-a2b6-9d5082b07f52",
+      "monthCount": 3.4,
+      "percentage": -7
+    },
+    {
+      "idInvest": "2e93b253-f4ed-41eb-a2b6-9d5082b07f52",
+      "monthCount": 4.5,
+      "percentage": 4
+    },
+    {
+      "idInvest": "2e93b253-f4ed-41eb-a2b6-9d5082b07f52",
+      "monthCount": 5.6,
+      "percentage": 2
+    },
+    {
+      "idInvest": "2e93b253-f4ed-41eb-a2b6-9d5082b07f52",
+      "monthCount": 6.7,
+      "percentage": -10
+    },
+    {
+      "idInvest": "2e93b253-f4ed-41eb-a2b6-9d5082b07f52",
+      "monthCount": 7.8,
+      "percentage": -9
+    },
+    {
+      "idInvest": "2e93b253-f4ed-41eb-a2b6-9d5082b07f52",
+      "monthCount": 8.9,
+      "percentage": 3
+    },
+    {
+      "idInvest": "2e93b253-f4ed-41eb-a2b6-9d5082b07f52",
+      "monthCount": 9.1,
+      "percentage": -3
+    },
+    {
+      "idInvest": "2e93b253-f4ed-41eb-a2b6-9d5082b07f52",
+      "monthCount": 10.11,
+      "percentage": -4
+    },
+    {
+      "idInvest": "2e93b253-f4ed-41eb-a2b6-9d5082b07f52",
+      "monthCount": 11.12,
+      "percentage": -8
+    },
+    {
+      "idInvest": "b21cbd7d-f4ae-4ff1-b015-c76b9c264a1a",
+      "monthCount": 1,
+      "percentage": 100
+    },
+    {
+      "idInvest": "b21cbd7d-f4ae-4ff1-b015-c76b9c264a1a",
+      "monthCount": 1.2,
+      "percentage": 5
+    },
+    {
+      "idInvest": "b21cbd7d-f4ae-4ff1-b015-c76b9c264a1a",
+      "monthCount": 2.3,
+      "percentage": -7
+    },
+    {
+      "idInvest": "b21cbd7d-f4ae-4ff1-b015-c76b9c264a1a",
+      "monthCount": 3.4,
+      "percentage": 10
+    },
+    {
+      "idInvest": "b21cbd7d-f4ae-4ff1-b015-c76b9c264a1a",
+      "monthCount": 4.5,
+      "percentage": 11
+    },
+    {
+      "idInvest": "b21cbd7d-f4ae-4ff1-b015-c76b9c264a1a",
+      "monthCount": 5.6,
+      "percentage": 11
+    },
+    {
+      "idInvest": "b21cbd7d-f4ae-4ff1-b015-c76b9c264a1a",
+      "monthCount": 6.7,
+      "percentage": 10
+    },
+    {
+      "idInvest": "b21cbd7d-f4ae-4ff1-b015-c76b9c264a1a",
+      "monthCount": 7.8,
+      "percentage": 6
+    },
+    {
+      "idInvest": "b21cbd7d-f4ae-4ff1-b015-c76b9c264a1a",
+      "monthCount": 8.9,
+      "percentage": -8
+    },
+    {
+      "idInvest": "b21cbd7d-f4ae-4ff1-b015-c76b9c264a1a",
+      "monthCount": 9.1,
+      "percentage": -4
+    },
+    {
+      "idInvest": "b21cbd7d-f4ae-4ff1-b015-c76b9c264a1a",
+      "monthCount": 10.11,
+      "percentage": 8
+    },
+    {
+      "idInvest": "b21cbd7d-f4ae-4ff1-b015-c76b9c264a1a",
+      "monthCount": 11.12,
+      "percentage": -9
+    }
+  ]
+}
