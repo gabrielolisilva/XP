@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  height: 100vh;
+}
+
+header {
+  background-color: blue;
+  text-align: center;
+  color: white;
+  padding: 10px 0;
+}
