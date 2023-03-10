@@ -1,10 +1,12 @@
 import React from "react";
+import Table from "./Table";
 
-const FundoElement = ({ item }) => {
-  console.log(item.id);
+const FundoElement = ({ item, reportsInfo, setreportsInfo }) => {
   return (
-    <div>
+    <div className="fundoContainer">
       <h1>{item.description}</h1>
+      <p>{item.id}</p>
+      <Table reportsInfo={reportsInfo} id={item.id} />
     </div>
   );
 };

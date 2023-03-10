@@ -4,27 +4,39 @@ import axios from "axios";
 import FundoElement from "./FundoElement";
 
 const Content = () => {
-  const [fundoElement, setfundoElement] = useState([]);
+  const [investmentsInfo, setinvestmentsInfo] = useState([]);
+  const [reportsInfo, setreportsInfo] = useState([]);
 
   useEffect(() => {
-    const getInvestiments = async () => {
+    const getDatas = async () => {
       try {
-        const response = await axios.get("http://localhost:3500/investments");
-        const data = response.data;
-        setfundoElement(data);
-        //console.log(data);
+        const responseInvestment = await axios.get(
+          "http://localhost:3500/investments"
+        );
+        const responseReports = await axios.get(
+          "http://localhost:3500/reports"
+        );
+        const investimentData = responseInvestment.data;
+        const reportsData = responseReports.data;
+        setinvestmentsInfo(investimentData);
+        setreportsInfo(reportsData);
       } catch (error) {
         console.log(error);
       }
     };
 
-    getInvestiments();
+    getDatas();
   }, []);
 
   return (
     <main>
-      {fundoElement.map((item) => (
-        <FundoElement item={item} key={item.id} />
+      {investmentsInfo.map((item) => (
+        <FundoElement
+          item={item}
+          key={item.id}
+          reportsInfo={reportsInfo}
+          setreportsInfo={setreportsInfo}
+        />
       ))}
     </main>
   );
