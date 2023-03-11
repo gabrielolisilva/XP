@@ -7,12 +7,8 @@ const FundoElement = ({ item, reportsInfo, percentageData }) => {
     <div className="fundoContainer">
       <h1>{item.description}</h1>
       {/* <p>{item.id}</p> */}
-      <div>
-        <Table
-          reportsInfo={reportsInfo}
-          id={item.id}
-          percentageData={percentageData}
-        />
+      <div className="tablePercDiv">
+        <Table reportsInfo={reportsInfo} id={item.id} />
         <PercentageElement id={item.id} percentageData={percentageData} />
       </div>
     </div>

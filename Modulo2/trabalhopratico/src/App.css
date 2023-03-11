@@ -32,4 +32,23 @@ table {
 td {
   border: 1px solid black;
   padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.tablePercDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.percentageNumbersDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+p {
+  border: 1px solid black;
+  padding: 5px 20px;
 }
