@@ -1,7 +1,7 @@
 import React from "react";
 import TableRow from "./TableRow";
 
-const Table = ({ id, reportsInfo, reportAllData }) => {
+const Table = ({ id, reportsInfo, percentageData }) => {
   return (
     <table>
       <tbody>
@@ -10,7 +10,7 @@ const Table = ({ id, reportsInfo, reportAllData }) => {
             item={item}
             id={id}
             key={item.id}
-            reportAllData={reportAllData}
+            percentageData={percentageData}
           />
         ))}
       </tbody>

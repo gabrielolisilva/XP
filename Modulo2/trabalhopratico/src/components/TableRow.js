@@ -1,6 +1,6 @@
 import React from "react";
 
-const TableRow = ({ item, id, reportAllData }) => {
+const TableRow = ({ item, id, percentageData }) => {
   /*   const fundoMultimercado = reportAllData.slice(0, 12);
   const fundoAcoes = reportAllData.slice(12, 24);
   const fundoTecnologia = reportAllData.slice(24, 36);
@@ -34,6 +34,9 @@ const TableRow = ({ item, id, reportAllData }) => {
           {/* <td>{item.investmentId}</td> */}
           <td>{`${item.month}/${item.year}`}</td>
           <td>{item.value.toFixed(2)}</td>
+          {/* {percentageData.map((item) => {
+            console.log(item.percentage);
+          })} */}
         </>
       )}
     </tr>

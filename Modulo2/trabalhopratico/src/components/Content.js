@@ -6,7 +6,7 @@ import FundoElement from "./FundoElement";
 const Content = () => {
   const [investmentsInfo, setinvestmentsInfo] = useState([]);
   const [reportsInfo, setreportsInfo] = useState([]);
-  const [reportAllData, setreportAllData] = useState([]);
+  const [percentageData, setpercentageData] = useState([]);
 
   function compare(a, b) {
     if (a.month < b.month) {
@@ -37,13 +37,16 @@ const Content = () => {
         const responseReports = await axios.get(
           "http://localhost:3500/reports"
         );
+        const percentageData = await axios.get(
+          "http://localhost:3500/percentage"
+        );
         const investimentData = responseInvestment.data;
         const reportsData = responseReports.data;
         reportsData.sort(compare);
         reportsData.sort(compare1);
         setinvestmentsInfo(investimentData);
         setreportsInfo(reportsData);
-        setreportAllData(reportsData);
+        setpercentageData(percentageData.data);
       } catch (error) {
         console.log(error);
       }
@@ -59,7 +62,7 @@ const Content = () => {
           item={item}
           key={item.id}
           reportsInfo={reportsInfo}
-          reportAllData={reportAllData}
+          percentageData={percentageData}
         />
       ))}
     </main>
