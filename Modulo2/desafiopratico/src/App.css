@@ -1,0 +1,43 @@
+.headerDiv {
+  background-color: rgba(88, 199, 250, 0.623);
+}
+
+.headerDiv > h1 {
+  text-align: center;
+  font-size: 20px;
+  padding: 10px 0;
+}
+
+.cityFilterDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.cityFilterDiv > h4 {
+  margin-top: 20px;
+}
+
+.resultDiv {
+  border: 1px solid black;
+  margin-top: 40px;
+}
+
+.totalInfoDiv {
+  text-align: center;
+}
+
+.totalInfoDiv > h3 {
+  padding: 20px 0;
+}
+
+.totalInfoDiv > div {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.totalInfoDiv > p {
+  padding: 30px 0;
+}

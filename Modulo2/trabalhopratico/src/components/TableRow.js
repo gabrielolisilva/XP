@@ -31,7 +31,7 @@ const TableRow = ({ item, id }) => {
     <tr>
       {item.investmentId === id && (
         <>
-          {/* <td>{item.investmentId}</td> */}
+          <td>{item.investmentId}</td>
           <td>{`${item.month}/${item.year}`}</td>
           <td>{item.value.toFixed(2)}</td>
         </>

@@ -6,7 +6,7 @@ const FundoElement = ({ item, reportsInfo, percentageData }) => {
   return (
     <div className="fundoContainer">
       <h1>{item.description}</h1>
-      {/* <p>{item.id}</p> */}
+      <p>{item.id}</p>
       <div className="tablePercDiv">
         <Table reportsInfo={reportsInfo} id={item.id} />
         <PercentageElement id={item.id} percentageData={percentageData} />
