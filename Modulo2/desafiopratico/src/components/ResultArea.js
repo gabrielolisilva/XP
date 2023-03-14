@@ -4,17 +4,17 @@ import Candidates from "./Candidates";
 
 const ResultArea = ({
   citySelected,
-  candidatesPerCity,
+  candidatesVotesCity,
   candidatesNamePerCity,
 }) => {
   return (
     <div className="resultDiv">
       <TotalData
         citySelected={citySelected}
-        candidatesPerCity={candidatesPerCity}
+        candidatesVotesCity={candidatesVotesCity}
       />
       <Candidates
-        candidatesPerCity={candidatesPerCity}
+        candidatesVotesCity={candidatesVotesCity}
         candidatesNamePerCity={candidatesNamePerCity}
       />
     </div>

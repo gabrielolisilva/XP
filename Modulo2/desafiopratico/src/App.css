@@ -48,9 +48,13 @@
   grid-area: 10px;
 }
 
-.candidateContainer {
+.singleCandidateDiv {
   width: 300px;
-  height: 100px;
+  height: 200px;
+  padding: 10px;
+}
+
+.candidateContainer {
   display: flex;
   gap: 20px;
 }

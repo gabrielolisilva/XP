@@ -9,8 +9,8 @@ import ResultArea from "./components/ResultArea";
 function App() {
   const [cityArray, setcityArray] = useState([]);
   const [citySelected, setcitySelected] = useState({});
-  const [allCandidates, setallCandidates] = useState([]);
-  const [candidatesPerCity, setcandidatesPerCity] = useState([]);
+  const [allVotes, setallVotes] = useState([]);
+  const [candidatesVotesCity, setcandidatesVotesCity] = useState([]);
   const [allCandidatesName, setallCandidatesName] = useState([]);
   const [candidatesNamePerCity, setcandidatesNamePerCity] = useState([]);
 
@@ -29,7 +29,7 @@ function App() {
         setallCandidatesName(_.orderBy(response[1].value.data, "name", "asc"));
 
       if (response[2].status === "fulfilled") {
-        setallCandidates(_.orderBy(response[2].value.data, "votes", "desc"));
+        setallVotes(_.orderBy(response[2].value.data, "votes", "desc"));
       }
     };
 
@@ -41,13 +41,12 @@ function App() {
     const inputValue = e.target.value;
 
     const selectedCity = cityArray.filter((item) => item.name === inputValue);
-    console.log(selectedCity[0]);
     setcitySelected(selectedCity[0]);
 
-    const candidatesArray = allCandidates.filter(
+    const candidatesArray = allVotes.filter(
       (items) => items.cityId === selectedCity[0].id
     );
-    setcandidatesPerCity(candidatesArray);
+    setcandidatesVotesCity(candidatesArray);
 
     const arrayNames = [];
 
@@ -61,8 +60,15 @@ function App() {
     }
     setcandidatesNamePerCity(arrayNames);
 
-    /* console.log(allCandidatesName);
-    console.log(candidatesArray);
+    /* const fullInfo = [
+      citySelected,
+      ...candidatesPerCity,
+      ...candidatesNamePerCity,
+    ];
+    setAllInfoCity(fullInfo);
+    console.log(allInfoCity); */
+    /* console.log(citySelected);
+    console.log(candidatesVotesCity);
     console.log(candidatesNamePerCity); */
   };
 
@@ -72,7 +78,7 @@ function App() {
       <CityFilter cityArray={cityArray} handleChange={handleChange} />
       <ResultArea
         citySelected={citySelected}
-        candidatesPerCity={candidatesPerCity}
+        candidatesVotesCity={candidatesVotesCity}
         candidatesNamePerCity={candidatesNamePerCity}
       />
     </div>

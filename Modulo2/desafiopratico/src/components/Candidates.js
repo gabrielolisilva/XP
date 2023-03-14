@@ -1,19 +1,25 @@
 import React from "react";
 import SingleCandidate from "./SingleCandidate";
-import SingleNameCandidate from "./SingleNameCandidate";
 
-const Candidates = ({ candidatesPerCity, candidatesNamePerCity }) => {
+const Candidates = ({ candidatesVotesCity, candidatesNamePerCity }) => {
+  //console.log(candidatesVotesCity, candidatesNamePerCity);
+
+  const newArrayAll = [];
+  for (let i in candidatesVotesCity) {
+    const newObj = {
+      ...candidatesVotesCity[i],
+      name: candidatesNamePerCity[i].name,
+      username: candidatesNamePerCity[i].username,
+    };
+    newArrayAll.push(newObj);
+  }
+
+  console.log(newArrayAll);
+
   return (
     <div className="candidatesContainer">
-      {candidatesPerCity.map((item) => (
-        <SingleCandidate
-          key={item.id}
-          item={item}
-          candidatesNamePerCity={candidatesNamePerCity}
-        />
-      ))}
-      {candidatesNamePerCity.map((item) => (
-        <SingleNameCandidate key={item.id} item={item} />
+      {newArrayAll.map((item) => (
+        <SingleCandidate key={item.id} item={item} />
       ))}
     </div>
   );
