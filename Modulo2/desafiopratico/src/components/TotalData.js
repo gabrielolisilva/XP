@@ -1,7 +1,7 @@
 import React from "react";
 /* toLocaleString("PT") */
 
-const TotalData = ({ citySelected }) => {
+const TotalData = ({ citySelected, candidatesPerCity }) => {
   return (
     <div className="totalInfoDiv">
       <h3>Eleição em {citySelected.name}</h3>
@@ -10,7 +10,7 @@ const TotalData = ({ citySelected }) => {
         <p>Abstenção: {citySelected.absence}</p>
         <p>Comparecimento: {citySelected.presence}</p>
       </div>
-      <p>candidatos</p>
+      <p>{candidatesPerCity.length} candidatos</p>
     </div>
   );
 };
