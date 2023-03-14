@@ -2,7 +2,7 @@ import React from "react";
 import SingleCandidate from "./SingleCandidate";
 
 const Candidates = ({ candidatesVotesCity, candidatesNamePerCity }) => {
-  //console.log(candidatesVotesCity, candidatesNamePerCity);
+  console.log(candidatesVotesCity, candidatesNamePerCity);
 
   const newArrayAll = [];
   for (let i in candidatesVotesCity) {
