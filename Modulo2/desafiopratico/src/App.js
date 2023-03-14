@@ -60,13 +60,6 @@ function App() {
     }
     setcandidatesNamePerCity(arrayNames);
 
-    /* const fullInfo = [
-      citySelected,
-      ...candidatesPerCity,
-      ...candidatesNamePerCity,
-    ];
-    setAllInfoCity(fullInfo);
-    console.log(allInfoCity); */
     /* console.log(citySelected);
     console.log(candidatesVotesCity);
     console.log(candidatesNamePerCity); */
