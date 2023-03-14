@@ -14,6 +14,7 @@ const ResultArea = ({
         candidatesVotesCity={candidatesVotesCity}
       />
       <Candidates
+        citySelected={citySelected}
         candidatesVotesCity={candidatesVotesCity}
         candidatesNamePerCity={candidatesNamePerCity}
       />

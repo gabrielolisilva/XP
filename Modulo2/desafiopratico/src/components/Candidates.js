@@ -1,8 +1,12 @@
 import React from "react";
 import SingleCandidate from "./SingleCandidate";
 
-const Candidates = ({ candidatesVotesCity, candidatesNamePerCity }) => {
-  console.log(candidatesVotesCity, candidatesNamePerCity);
+const Candidates = ({
+  citySelected,
+  candidatesVotesCity,
+  candidatesNamePerCity,
+}) => {
+  //console.log(candidatesVotesCity, candidatesNamePerCity);
 
   const newArrayAll = [];
   for (let i in candidatesVotesCity) {
@@ -11,7 +15,12 @@ const Candidates = ({ candidatesVotesCity, candidatesNamePerCity }) => {
       name: candidatesNamePerCity[i].name,
       username: candidatesNamePerCity[i].username,
     };
-    newArrayAll.push(newObj);
+
+    if (newArrayAll.length === 0) {
+      newArrayAll.push({ ...newObj, winner: true });
+    } else {
+      newArrayAll.push({ ...newObj, winner: false });
+    }
   }
 
   console.log(newArrayAll);
@@ -19,7 +28,11 @@ const Candidates = ({ candidatesVotesCity, candidatesNamePerCity }) => {
   return (
     <div className="candidatesContainer">
       {newArrayAll.map((item) => (
-        <SingleCandidate key={item.id} item={item} />
+        <SingleCandidate
+          key={item.id}
+          item={item}
+          citySelected={citySelected}
+        />
       ))}
     </div>
   );
