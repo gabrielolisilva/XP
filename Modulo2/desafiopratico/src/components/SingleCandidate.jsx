@@ -11,7 +11,7 @@ const SingleCandidate = ({ item, citySelected }) => {
       <div className="candidateContainer">
         <img
           src={window.location.origin + `/img/${item.username}.png`}
-          alt="alternativa_img"
+          alt={`${item.name}`}
         />
         <div className="headerCandidate">
           <h5>{porcentageData(item.votes)}</h5>

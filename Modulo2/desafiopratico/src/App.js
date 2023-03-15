@@ -40,19 +40,22 @@ function App() {
     //console.log(candidatesPerCity);
     const inputValue = e.target.value;
 
+    //select what city is selected
     const selectedCity = cityArray.filter((item) => item.name === inputValue);
     setcitySelected(selectedCity[0]);
 
-    const candidatesArray = allVotes.filter(
+    //filter from all votes the votes related to the city selected
+    const votesPerCityArray = allVotes.filter(
       (items) => items.cityId === selectedCity[0].id
     );
-    setcandidatesVotesCity(candidatesArray);
+    setcandidatesVotesCity(votesPerCityArray);
 
     const arrayNames = [];
 
-    for (let i in candidatesArray) {
+    //from votesPerCityArray select the names related to the votes
+    for (let i in votesPerCityArray) {
       const namesArray = allCandidatesName.filter(
-        (items) => items.id === candidatesArray[i].candidateId
+        (items) => items.id === votesPerCityArray[i].candidateId
       );
 
       const [nameObj] = namesArray;
