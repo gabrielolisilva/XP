@@ -6,26 +6,50 @@ import MainPage from "./pages/MainPage";
 
 function App() {
   const [allCards, setallCards] = useState([]);
+  const [isLoading, setisLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const getDataInfo = async () => {
-      const questions = await getData("http://localhost:3500/questions");
+      try {
+        const questions = await getData("http://localhost:3500/questions");
 
-      const cardsArrayWithId = questions.map((card) => {
-        return { id: generateId(), ...card, questionShow: true };
-      });
+        const cardsArrayWithId = questions.map((card) => {
+          return { id: generateId(), ...card, questionShow: true };
+        });
 
-      setallCards(cardsArrayWithId);
+        setallCards(cardsArrayWithId);
+      } catch (error) {
+        setError(error.message);
+      }
     };
 
-    getDataInfo();
+    setTimeout(() => {
+      getDataInfo();
+      setisLoading(false);
+    }, 1000);
   }, []);
 
-  console.log(allCards);
+  const handleSingleCardToggle = (card) => {
+    card.questionShow = !card.questionShow;
+
+    setallCards([...allCards]);
+    console.log(card);
+  };
 
   return (
     <div className="App">
-      <MainPage allCards={allCards} />
+      {error ? (
+        <h1 className="text-center mt-7 bg-red-400 py-4 w-96 m-auto rounded-md">
+          {error}
+        </h1>
+      ) : (
+        <MainPage
+          allCards={allCards}
+          handleSingleCardToggle={handleSingleCardToggle}
+          isLoading={isLoading}
+        />
+      )}
     </div>
   );
 }
