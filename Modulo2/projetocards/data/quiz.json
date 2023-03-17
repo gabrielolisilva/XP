@@ -1,0 +1,44 @@
+{
+  "questions": [
+    {
+      "question": "De quem é a famosa frase “Penso, logo existo”?",
+      "answer": "Descartes"
+    },
+    {
+      "question": "De onde é a invenção do chuveiro elétrico?",
+      "answer": "Brasil"
+    },
+    {
+      "question": "Quais o menor e o maior país do mundo?",
+      "answer": "Vaticano e Rússia"
+    },
+    {
+      "question": "Qual o nome do presidente do Brasil que ficou conhecido como Jango?",
+      "answer": "João Goulart"
+    },
+    {
+      "question": "Qual o grupo em que todas as palavras foram escritas corretamente?",
+      "answer": "Asterisco, beneficente, meteorologia, entretido"
+    },
+    {
+      "question": "Qual o livro mais vendido no mundo a seguir à Bíblia?",
+      "answer": "Dom Quixote"
+    },
+    {
+      "question": "Quantas casas decimais tem o número pi?",
+      "answer": "Infinitas"
+    },
+    {
+      "question": "Atualmente, quantos elementos químicos a tabela periódica possui?",
+      "answer": "118"
+    },
+    {
+      "question": "Quais os países que têm a maior e a menor expectativa de vida do mundo?",
+      "answer": "Japão e Serra Leoa"
+    },
+    {
+      "question": "O que a palavra legend significa em português?",
+      "answer": "Lenda"
+    }
+  ]
+}
