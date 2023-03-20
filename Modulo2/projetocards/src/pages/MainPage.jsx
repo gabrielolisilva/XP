@@ -16,9 +16,16 @@ import Header from "../components/Header";
 import CreateEditPost from "../components/CreateEditPost";
 import generateId from "../services/generateId";
 
-const MainPage = ({ allCards, setallCards, isLoading }) => {
+const MainPage = ({ allCards, setallCards, isLoading, error, setError }) => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [createMode, setCreateMode] = useState(true);
+  const [questionValue, setQuestionValue] = useState("");
+  const [answerValue, setAnswerValue] = useState("");
+  const [selectedCard, setSelectedCard] = useState({});
+
+  const handleSelectedTab = (tabIndex) => {
+    setSelectedTab(tabIndex);
+  };
 
   const handleSingleCardToggle = (card) => {
     card.questionShow = !card.questionShow;
@@ -28,9 +35,13 @@ const MainPage = ({ allCards, setallCards, isLoading }) => {
   };
 
   const handleEditCard = (card) => {
-    console.log(card);
-    setSelectedTab(1);
+    //console.log(card);
+    setSelectedCard(card);
 
+    const { question, answer } = card;
+    setQuestionValue(question);
+    setAnswerValue(answer);
+    setSelectedTab(1);
     setCreateMode(false);
   };
 
@@ -41,10 +52,6 @@ const MainPage = ({ allCards, setallCards, isLoading }) => {
     setallCards(newArray);
   };
 
-  const handleSelectedTab = (tabIndex) => {
-    setSelectedTab(tabIndex);
-  };
-
   const shuffleCards = () => {
     const copyArray = [...allCards];
     const shuffledArray = shuffleArray(copyArray);
@@ -52,8 +59,13 @@ const MainPage = ({ allCards, setallCards, isLoading }) => {
     setallCards(shuffledArray);
   };
 
-  const handleEditCreatePost = ({ questionValue, answerValue }) => {
+  const handleEditCreatePost = () => {
     if (createMode) {
+      if (questionValue === "" && answerValue === "") {
+        setError("Os campos estão vazios");
+        return;
+      }
+
       const newComponent = {
         id: generateId(),
         question: questionValue,
@@ -65,7 +77,18 @@ const MainPage = ({ allCards, setallCards, isLoading }) => {
       setallCards(newArray);
       setSelectedTab(0);
     } else {
-      console.log("Post Editado");
+      const newCard = {
+        ...selectedCard,
+        question: questionValue,
+        answer: answerValue,
+      };
+
+      const foundIndex = allCards.findIndex(
+        (item) => item.id === selectedCard.id
+      );
+      allCards[foundIndex] = newCard;
+
+      setSelectedTab(0);
     }
   };
 
@@ -119,6 +142,10 @@ const MainPage = ({ allCards, setallCards, isLoading }) => {
           <CreateEditPost
             createMode={createMode}
             setCreateMode={setCreateMode}
+            questionValue={questionValue}
+            setQuestionValue={setQuestionValue}
+            answerValue={answerValue}
+            setAnswerValue={setAnswerValue}
             handleEditCreatePost={handleEditCreatePost}
           />
         </TabPanel>

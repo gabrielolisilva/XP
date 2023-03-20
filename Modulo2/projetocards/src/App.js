@@ -41,6 +41,8 @@ function App() {
           allCards={allCards}
           isLoading={isLoading}
           setallCards={setallCards}
+          error={error}
+          setError={setError}
         />
       )}
     </div>

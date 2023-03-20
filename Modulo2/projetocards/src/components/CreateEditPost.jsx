@@ -1,16 +1,15 @@
-import { useState } from "react";
-
 import React from "react";
 import Button from "./Button";
 
 const CreateEditPost = ({
   createMode,
   setCreateMode,
+  questionValue,
+  setQuestionValue,
+  answerValue,
+  setAnswerValue,
   handleEditCreatePost,
 }) => {
-  const [questionValue, setQuestionValue] = useState("");
-  const [answerValue, setAnswerValue] = useState("");
-
   const color = createMode ? "bg-green-500" : "bg-yellow-200";
   const fontSizeLabel = "text-xl";
 
@@ -62,9 +61,7 @@ const CreateEditPost = ({
           <Button
             bgColor="bg-green-400"
             title="Enviar"
-            onClickMethod={() =>
-              handleEditCreatePost({ questionValue, answerValue })
-            }
+            onClickMethod={handleEditCreatePost}
           />
         </div>
       </div>
