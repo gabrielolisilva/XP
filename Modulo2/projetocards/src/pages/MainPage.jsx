@@ -1,5 +1,9 @@
+import { useState } from "react";
+
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+
+import shuffleArray from "../services/shuffleArrays";
 
 import {
   AiOutlineEdit as EditIcon,
@@ -10,18 +14,50 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Cards from "../components/Cards";
 import Header from "../components/Header";
 
-const MainPage = ({
-  allCards,
-  handleSingleCardToggle,
-  handleDeleteCard,
-  shuffleCards,
-  isLoading,
-}) => {
+const MainPage = ({ allCards, setallCards, isLoading }) => {
+  const [selectedTab, setSelectedTab] = useState(0);
+
+  const handleSingleCardToggle = (card) => {
+    card.questionShow = !card.questionShow;
+
+    setallCards([...allCards]);
+    console.log(card);
+  };
+
+  const handleEditCard = (card) => {
+    console.log(card);
+
+    setSelectedTab(1);
+  };
+
+  const handleDeleteCard = (card) => {
+    console.log(card);
+    const copiedArray = [...allCards];
+    const newArray = copiedArray.filter((items) => items.id !== card.id);
+
+    setallCards(newArray);
+  };
+
+  const handleSelectedTab = (tabIndex) => {
+    setSelectedTab(tabIndex);
+  };
+
+  const shuffleCards = () => {
+    const copyArray = [...allCards];
+    const shuffledArray = shuffleArray(copyArray);
+
+    setallCards(shuffledArray);
+  };
+
   return (
     <>
       <Header>Cards Studio</Header>
 
-      <Tabs className="mt-5 px-2">
+      <Tabs
+        className="mt-5 px-2"
+        selectedIndex={selectedTab}
+        onSelect={handleSelectedTab}
+      >
         <TabList>
           <Tab>All posts</Tab>
           <Tab>Create / Edit</Tab>
@@ -43,7 +79,11 @@ const MainPage = ({
                   </ul>
 
                   <div className="mt-2 flex items-center gap-2 justify-end">
-                    <EditIcon size={22} className="cursor-pointer" />
+                    <EditIcon
+                      size={22}
+                      className="cursor-pointer"
+                      onClick={handleEditCard}
+                    />
                     <DeleteIcon
                       size={22}
                       className="cursor-pointer"

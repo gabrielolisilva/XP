@@ -2,7 +2,6 @@ import "./App.css";
 import { React, useState, useEffect } from "react";
 import getData from "./services/getAPI";
 import generateId from "./services/generateId";
-import shuffleArray from "./services/shuffleArrays";
 import MainPage from "./pages/MainPage";
 
 function App() {
@@ -31,28 +30,6 @@ function App() {
     }, 1000);
   }, []);
 
-  const handleSingleCardToggle = (card) => {
-    card.questionShow = !card.questionShow;
-
-    setallCards([...allCards]);
-    console.log(card);
-  };
-
-  const handleDeleteCard = (card) => {
-    console.log(card);
-    const copiedArray = [...allCards];
-    const newArray = copiedArray.filter((items) => items.id !== card.id);
-
-    setallCards(newArray);
-  };
-
-  const shuffleCards = () => {
-    const copyArray = [...allCards];
-    const shuffledArray = shuffleArray(copyArray);
-
-    setallCards(shuffledArray);
-  };
-
   return (
     <div className="App">
       {error ? (
@@ -62,10 +39,8 @@ function App() {
       ) : (
         <MainPage
           allCards={allCards}
-          handleSingleCardToggle={handleSingleCardToggle}
-          handleDeleteCard={handleDeleteCard}
-          shuffleCards={shuffleCards}
           isLoading={isLoading}
+          setallCards={setallCards}
         />
       )}
     </div>
