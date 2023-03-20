@@ -13,9 +13,12 @@ import {
 import ClipLoader from "react-spinners/ClipLoader";
 import Cards from "../components/Cards";
 import Header from "../components/Header";
+import CreateEditPost from "../components/CreateEditPost";
+import generateId from "../services/generateId";
 
 const MainPage = ({ allCards, setallCards, isLoading }) => {
   const [selectedTab, setSelectedTab] = useState(0);
+  const [createMode, setCreateMode] = useState(true);
 
   const handleSingleCardToggle = (card) => {
     card.questionShow = !card.questionShow;
@@ -26,12 +29,12 @@ const MainPage = ({ allCards, setallCards, isLoading }) => {
 
   const handleEditCard = (card) => {
     console.log(card);
-
     setSelectedTab(1);
+
+    setCreateMode(false);
   };
 
   const handleDeleteCard = (card) => {
-    console.log(card);
     const copiedArray = [...allCards];
     const newArray = copiedArray.filter((items) => items.id !== card.id);
 
@@ -47,6 +50,23 @@ const MainPage = ({ allCards, setallCards, isLoading }) => {
     const shuffledArray = shuffleArray(copyArray);
 
     setallCards(shuffledArray);
+  };
+
+  const handleEditCreatePost = ({ questionValue, answerValue }) => {
+    if (createMode) {
+      const newComponent = {
+        id: generateId(),
+        question: questionValue,
+        answer: answerValue,
+        questionShow: true,
+      };
+      const newArray = [newComponent, ...allCards];
+
+      setallCards(newArray);
+      setSelectedTab(0);
+    } else {
+      console.log("Post Editado");
+    }
   };
 
   return (
@@ -82,7 +102,7 @@ const MainPage = ({ allCards, setallCards, isLoading }) => {
                     <EditIcon
                       size={22}
                       className="cursor-pointer"
-                      onClick={handleEditCard}
+                      onClick={() => handleEditCard(card)}
                     />
                     <DeleteIcon
                       size={22}
@@ -96,7 +116,11 @@ const MainPage = ({ allCards, setallCards, isLoading }) => {
           )}
         </TabPanel>
         <TabPanel>
-          <h2>Create</h2>
+          <CreateEditPost
+            createMode={createMode}
+            setCreateMode={setCreateMode}
+            handleEditCreatePost={handleEditCreatePost}
+          />
         </TabPanel>
         <TabPanel>
           {isLoading ? (

@@ -7,7 +7,7 @@ const Button = ({
   onClickMethod,
 }) => {
   return (
-    <div className="flex justify-center mt-7">
+    <div className="flex justify-left mt-4">
       <button
         type={type}
         className={`${bgColor} p-4 rounded-lg text-white`}
