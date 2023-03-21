@@ -34,16 +34,13 @@ const MainPage = ({ allCards, setallCards, isLoading }) => {
 
   const handleSingleCardToggle = (card) => {
     card.questionShow = !card.questionShow;
-
     setallCards([...allCards]);
-    console.log(card);
   };
 
   const handleEditCard = (card) => {
-    console.log(card);
+    const { question, answer } = card;
     setSelectedCard(card);
 
-    const { question, answer } = card;
     setQuestionValue(question);
     setAnswerValue(answer);
     setSelectedTab(1);
