@@ -41,6 +41,7 @@ const CreateEditPost = ({
           value={questionValue}
           onChange={(e) => setQuestionValue(e.target.value)}
         />
+
         <label htmlFor="answer" className={fontSizeLabel}>
           Resposta:
         </label>

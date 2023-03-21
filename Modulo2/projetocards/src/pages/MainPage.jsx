@@ -10,13 +10,18 @@ import {
   AiOutlineDelete as DeleteIcon,
 } from "react-icons/ai";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import ClipLoader from "react-spinners/ClipLoader";
 import Cards from "../components/Cards";
 import Header from "../components/Header";
 import CreateEditPost from "../components/CreateEditPost";
-import generateId from "../services/generateId";
 
-const MainPage = ({ allCards, setallCards, isLoading, error, setError }) => {
+import generateId from "../services/generateId";
+import { deleteCard } from "../services/apiServices";
+
+const MainPage = ({ allCards, setallCards, isLoading }) => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [createMode, setCreateMode] = useState(true);
   const [questionValue, setQuestionValue] = useState("");
@@ -46,8 +51,13 @@ const MainPage = ({ allCards, setallCards, isLoading, error, setError }) => {
   };
 
   const handleDeleteCard = (card) => {
-    const copiedArray = [...allCards];
-    const newArray = copiedArray.filter((items) => items.id !== card.id);
+    toast.success("Item excluído !");
+    //Back-end
+    console.log(card.id);
+    //deleteCard(card.id);
+
+    //Front-end
+    const newArray = allCards.filter((items) => items.id !== card.id);
 
     setallCards(newArray);
   };
@@ -61,11 +71,11 @@ const MainPage = ({ allCards, setallCards, isLoading, error, setError }) => {
 
   const handleEditCreatePost = () => {
     if (createMode) {
-      if (questionValue === "" && answerValue === "") {
-        setError("Os campos estão vazios");
+      if (questionValue === "" || answerValue === "") {
+        console.log("Ficou");
+        toast.info("Pergunta e Resposta são obrigatórios");
         return;
       }
-
       const newComponent = {
         id: generateId(),
         question: questionValue,
@@ -95,7 +105,7 @@ const MainPage = ({ allCards, setallCards, isLoading, error, setError }) => {
   return (
     <>
       <Header>Cards Studio</Header>
-
+      <ToastContainer />;
       <Tabs
         className="mt-5 px-2"
         selectedIndex={selectedTab}
