@@ -19,7 +19,7 @@ import Header from "../components/Header";
 import CreateEditPost from "../components/CreateEditPost";
 
 import generateId from "../services/generateId";
-import { deleteCard } from "../services/apiServices";
+import { createCard, deleteCard, editCard } from "../services/apiServices";
 
 const MainPage = ({ allCards, setallCards, isLoading }) => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -40,7 +40,7 @@ const MainPage = ({ allCards, setallCards, isLoading }) => {
   };
 
   const handleEditCard = (card) => {
-    //console.log(card);
+    console.log(card);
     setSelectedCard(card);
 
     const { question, answer } = card;
@@ -52,9 +52,10 @@ const MainPage = ({ allCards, setallCards, isLoading }) => {
 
   const handleDeleteCard = (card) => {
     toast.success("Item excluído !");
+    console.log(card);
+
     //Back-end
-    console.log(card.id);
-    //deleteCard(card.id);
+    deleteCard(card.id);
 
     //Front-end
     const newArray = allCards.filter((items) => items.id !== card.id);
@@ -76,6 +77,10 @@ const MainPage = ({ allCards, setallCards, isLoading }) => {
         toast.info("Pergunta e Resposta são obrigatórios");
         return;
       }
+      //Back-end
+      createCard(questionValue, answerValue);
+
+      //Front-end
       const newComponent = {
         id: generateId(),
         question: questionValue,
@@ -85,6 +90,8 @@ const MainPage = ({ allCards, setallCards, isLoading }) => {
       const newArray = [newComponent, ...allCards];
 
       setallCards(newArray);
+      setQuestionValue("");
+      setAnswerValue("");
       setSelectedTab(0);
     } else {
       const newCard = {
@@ -92,7 +99,10 @@ const MainPage = ({ allCards, setallCards, isLoading }) => {
         question: questionValue,
         answer: answerValue,
       };
+      //Back-end
+      editCard(selectedCard.id, newCard);
 
+      //Front-end
       const foundIndex = allCards.findIndex(
         (item) => item.id === selectedCard.id
       );

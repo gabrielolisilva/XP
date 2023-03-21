@@ -5,10 +5,6 @@ const axiosInstance = axios.create({
   timeout: 5000,
 });
 
-export async function getUrl(url) {
-  await axiosInstance.get(url);
-}
-
 export async function exclude(url) {
   await axiosInstance.delete(url);
 }

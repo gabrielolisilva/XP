@@ -29,7 +29,7 @@ function App() {
       setisLoading(false);
     }, 1000);
   }, []);
-
+  console.log(allCards);
   return (
     <div className="App">
       {error ? (

@@ -1,9 +1,5 @@
 import generateId from "./generateId";
-import { getUrl, create, edit, exclude } from "./httpService";
-
-export async function getData() {
-  await getUrl("/questions");
-}
+import { create, edit, exclude } from "./httpService";
 
 export async function deleteCard(cardId) {
   await exclude(`/questions/${cardId}`);
@@ -20,11 +16,7 @@ export async function createCard(question, answer) {
   return newCard;
 }
 
-export async function editCard(card, question, answer) {
-  const newEditedCard = edit("/questions", {
-    ...card,
-    question: question,
-    answer: answer,
-  });
+export async function editCard(cardId, cardUpdated) {
+  const newEditedCard = edit(`/questions/${cardId}`, cardUpdated);
   return newEditedCard;
 }
