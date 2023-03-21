@@ -1,7 +1,6 @@
 import "./App.css";
 import { React, useState, useEffect } from "react";
 import getData from "./services/getAPI";
-import generateId from "./services/generateId";
 import MainPage from "./pages/MainPage";
 
 function App() {
@@ -12,13 +11,8 @@ function App() {
   useEffect(() => {
     const getDataInfo = async () => {
       try {
-        const questions = await getData("http://localhost:3500/questions");
-
-        const cardsArrayWithId = questions.map((card) => {
-          return { id: generateId(), ...card, questionShow: true };
-        });
-
-        setallCards(cardsArrayWithId);
+        const questionsData = await getData("http://localhost:3500/questions");
+        setallCards(questionsData);
       } catch (error) {
         setError(error.message);
       }
