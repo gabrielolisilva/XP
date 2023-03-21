@@ -4,10 +4,11 @@ import Button from "./Button";
 
 const Cards = ({ allCards, handleSingleCardToggle, shuffleCards }) => {
   return (
-    <div>
+    <div className="border-4 border-blue-300 rounded-lg p-3">
       <Button
         title="Embaralhar cards"
         bgColor="bg-gray-500"
+        justify="justify-center"
         onClickMethod={shuffleCards}
       />
 

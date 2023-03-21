@@ -29,6 +29,7 @@ const CreateEditPost = ({
         <Button
           bgColor="bg-gray-500"
           title="Create Post"
+          justify="justify-left"
           onClickMethod={createCardButton}
         />
         <label htmlFor="question" className={fontSizeLabel}>

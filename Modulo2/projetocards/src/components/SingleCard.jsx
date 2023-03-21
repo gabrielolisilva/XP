@@ -4,13 +4,13 @@ const SingleCard = ({ card, handleSingleCardToggle }) => {
   const { question, answer, questionShow } = card;
   return (
     <div
-      className="w-96 h-20 bg-emerald-600 my-6 mx-auto flex justify-center items-center rounded cursor-pointer text-center"
+      className="w-[450px] h-[100px] bg-emerald-600 my-6 mx-auto flex justify-center items-center rounded cursor-pointer text-center"
       onClick={() => handleSingleCardToggle(card)}
     >
       {questionShow ? (
-        <h1 className="font-semibold text-white">{question}</h1>
+        <h1 className="font-semibold text-xl text-white">{question}</h1>
       ) : (
-        <h3 className="font-semibold text-white">{answer}</h3>
+        <h3 className="font-semibold text-lg text-white">{answer}</h3>
       )}
     </div>
   );
