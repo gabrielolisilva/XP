@@ -13,15 +13,22 @@ import {
   Icon,
   IconButton,
 } from "@mui/material";
+import { useEffect, useState } from "react";
+import { getEventsEndPoint, IEvent } from "../backend/backend";
 
 const daysWeek: string[] = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
 interface ICalendarCell {
   date: string;
+  dayOfMonth: number;
+  events: IEvent[];
 }
 
-function generateCalendar(date: string): ICalendarCell[][] {
-  const weeks: ICalendarCell[][] = []; //an array with 4 array related to each week
+function generateCalendar(
+  date: string,
+  allEvents: IEvent[]
+): ICalendarCell[][] {
+  const weeks: ICalendarCell[][] = []; //[] week [] week day
   const jsDate = new Date(`${date}T12:00:00`);
   const currentMonth = jsDate.getMonth();
 
@@ -37,7 +44,11 @@ function generateCalendar(date: string): ICalendarCell[][] {
       const isoDate = `${currentDay.getFullYear()}-${(currentDay.getMonth() + 1)
         .toString()
         .padStart(2, "0")}-${currentDay.getDate().toString().padStart(2, "0")}`;
-      week.push({ date: isoDate });
+      week.push({
+        date: isoDate,
+        dayOfMonth: currentDay.getDate(),
+        events: allEvents.filter((events) => events.date === isoDate),
+      });
       currentDay.setDate(currentDay.getDate() + 1);
     }
     weeks.push(week);
@@ -50,9 +61,16 @@ function getTodayDate() {
   return "2021-06-17";
 }
 
-const weeks = generateCalendar(getTodayDate());
-
 const CalendarScreen = () => {
+  const [events, setEvents] = useState<IEvent[]>([]);
+  const weeks = generateCalendar(getTodayDate(), events);
+  const firstDate = weeks[0][0].date;
+  const lastDate = weeks[weeks.length - 1][6].date; //last day of week is 6 - 0 is sunday
+
+  useEffect(() => {
+    getEventsEndPoint(firstDate, lastDate).then((resp) => setEvents(resp));
+  }, [firstDate, lastDate]);
+
   return (
     <Box display="flex" height="100%" alignItems="stretch">
       <Box
@@ -105,7 +123,18 @@ const CalendarScreen = () => {
               <TableRow key={i}>
                 {week.map((cell) => (
                   <TableCell align="center" key={cell.date}>
-                    {cell.date}
+                    <div className="dayOfMonth">{cell.dayOfMonth}</div>
+
+                    {cell.events.map((event) => (
+                      <button className="eventButton" key={event.id}>
+                        {event.time && (
+                          <span>
+                            <Icon>watch_later</Icon> {event.time}
+                          </span>
+                        )}
+                        {event.desc}
+                      </button>
+                    ))}
                   </TableCell>
                 ))}
               </TableRow>
