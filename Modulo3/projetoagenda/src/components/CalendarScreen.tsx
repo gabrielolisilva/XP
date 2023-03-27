@@ -14,19 +14,25 @@ import {
   IconButton,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getEventsEndPoint, IEvent } from "../backend/backend";
+import {
+  getEventsEndPoint,
+  getCalendarEndPoint,
+  IEvent,
+  ICalendar,
+} from "../backend/backend";
 
 const daysWeek: string[] = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
 interface ICalendarCell {
   date: string;
   dayOfMonth: number;
-  events: IEvent[];
+  events: (IEvent & { calendar: ICalendar })[];
 }
 
 function generateCalendar(
   date: string,
-  allEvents: IEvent[]
+  allEvents: IEvent[],
+  calendars: ICalendar[]
 ): ICalendarCell[][] {
   const weeks: ICalendarCell[][] = []; //[] week [] week day
   const jsDate = new Date(`${date}T12:00:00`);
@@ -47,7 +53,14 @@ function generateCalendar(
       week.push({
         date: isoDate,
         dayOfMonth: currentDay.getDate(),
-        events: allEvents.filter((events) => events.date === isoDate),
+        events: allEvents
+          .filter((events) => events.date === isoDate)
+          .map((item) => {
+            const calendar = calendars.find(
+              (cal) => cal.id === item.calendarId
+            )!; // ! to avoid calendar to be undefined, sure that is not undefined
+            return { ...item, calendar };
+          }),
       });
       currentDay.setDate(currentDay.getDate() + 1);
     }
@@ -61,14 +74,27 @@ function getTodayDate() {
   return "2021-06-17";
 }
 
+function toggleCalendar(i: number) {
+  console.log(i);
+}
+
 const CalendarScreen = () => {
   const [events, setEvents] = useState<IEvent[]>([]);
-  const weeks = generateCalendar(getTodayDate(), events);
+  const [calendars, setCalendars] = useState<ICalendar[]>([]);
+  const [calendarsSelected, setCalendarsSelected] = useState<boolean[]>([]);
+  const weeks = generateCalendar(getTodayDate(), events, calendars);
   const firstDate = weeks[0][0].date;
   const lastDate = weeks[weeks.length - 1][6].date; //last day of week is 6 - 0 is sunday
 
   useEffect(() => {
-    getEventsEndPoint(firstDate, lastDate).then((resp) => setEvents(resp));
+    Promise.all([
+      getCalendarEndPoint(),
+      getEventsEndPoint(firstDate, lastDate),
+    ]).then(([calendar, events]) => {
+      setCalendarsSelected(calendars.map(() => true));
+      setCalendars(calendar);
+      setEvents(events);
+    });
   }, [firstDate, lastDate]);
 
   return (
@@ -83,8 +109,18 @@ const CalendarScreen = () => {
 
         <Box marginTop="64px">
           <h3>Agendas</h3>
-          <FormControlLabel control={<Checkbox />} label="Pessoal" />
-          <FormControlLabel control={<Checkbox />} label="Trabalho" />
+          {calendars.map((item, i) => (
+            <FormControlLabel
+              key={item.id}
+              control={
+                <Checkbox
+                  checked={calendarsSelected[i]}
+                  onChange={() => toggleCalendar(i)}
+                />
+              }
+              label={item.name}
+            />
+          ))}
         </Box>
       </Box>
       <TableContainer component={"div"}>
@@ -125,16 +161,34 @@ const CalendarScreen = () => {
                   <TableCell align="center" key={cell.date}>
                     <div className="dayOfMonth">{cell.dayOfMonth}</div>
 
-                    {cell.events.map((event) => (
-                      <button className="eventButton" key={event.id}>
-                        {event.time && (
-                          <span>
-                            <Icon>watch_later</Icon> {event.time}
+                    {cell.events.map((event) => {
+                      const color = event.calendar.color;
+
+                      return (
+                        <button className="eventButton" key={event.id}>
+                          {event.time && (
+                            <>
+                              <Icon style={{ color }} fontSize="inherit">
+                                watch_later
+                              </Icon>
+                              <Box component="span" margin="0 4px">
+                                {event.time}
+                              </Box>
+                            </>
+                          )}
+                          <span
+                            style={{
+                              backgroundColor: color,
+                              color: "white",
+                              padding: "3px",
+                              borderRadius: "5px",
+                            }}
+                          >
+                            {event.desc}
                           </span>
-                        )}
-                        {event.desc}
-                      </button>
-                    ))}
+                        </button>
+                      );
+                    })}
                   </TableCell>
                 ))}
               </TableRow>
