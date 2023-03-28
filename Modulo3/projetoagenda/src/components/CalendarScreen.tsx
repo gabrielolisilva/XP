@@ -27,6 +27,7 @@ import {
   nextMounth,
 } from "../dateFunctions";
 import { Link, useParams } from "react-router-dom";
+import EventFormDialog from "./EventFormDialog";
 
 const daysWeek: string[] = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
@@ -90,6 +91,7 @@ const CalendarScreen = () => {
   const [events, setEvents] = useState<IEvent[]>([]);
   const [calendars, setCalendars] = useState<ICalendar[]>([]);
   const [calendarsSelected, setCalendarsSelected] = useState<boolean[]>([]);
+  const [open, setOpen] = useState<boolean>(false);
   const weeks = generateCalendar(
     date + "-01",
     events,
@@ -124,7 +126,9 @@ const CalendarScreen = () => {
         padding="8px 16px"
       >
         <h2>Agenda React</h2>
-        <Button variant="contained">Novo Evento</Button>
+        <Button variant="contained" onClick={() => setOpen(true)}>
+          Novo Evento
+        </Button>
 
         <Box marginTop="64px">
           <h3>Agendas</h3>
@@ -225,6 +229,8 @@ const CalendarScreen = () => {
             </TableBody>
           </Table>
         </TableContainer>
+
+        <EventFormDialog open={open} onClose={() => setOpen(false)} />
       </Box>
     </Box>
   );
