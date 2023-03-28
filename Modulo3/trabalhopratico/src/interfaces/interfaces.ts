@@ -9,4 +9,5 @@ export interface IDespesas {
 
 export interface IHeaderProps {
   allDespesas: IDespesas[];
+  currentDespesas: IDespesas[];
 }

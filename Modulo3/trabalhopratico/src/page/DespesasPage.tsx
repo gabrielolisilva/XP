@@ -33,8 +33,16 @@ const DespesasPage = () => {
       className="despesasPageContainer"
       height="100vh"
     >
-      <Box height="20vh">
-        <HeaderComponent allDespesas={allDespesas} />
+      <Box
+        height="20vh"
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <HeaderComponent
+          allDespesas={allDespesas}
+          currentDespesas={currentDespesas}
+        />
       </Box>
       <Box flex="1">
         <TableComponent />

@@ -8,7 +8,7 @@ import { IHeaderProps } from "../interfaces/interfaces";
 import * as _ from "lodash";
 
 const HeaderComponent = (props: IHeaderProps) => {
-  const { allDespesas } = props;
+  const { allDespesas, currentDespesas } = props;
   const months = allDespesas.map((item) => {
     return item.mes.slice(0, 4);
   });
@@ -18,8 +18,21 @@ const HeaderComponent = (props: IHeaderProps) => {
   const days = allDespesas.map((item) => {
     return item.mes.slice(5, 7);
   });
-  const uniqueDays = days.filter((item, index) => {
-    return days.indexOf(item) === index;
+  const uniqueDays = days
+    .filter((item, index) => {
+      return days.indexOf(item) === index;
+    })
+    .map((item) => {
+      return parseInt(item, 10);
+    })
+    .sort((a, b) => {
+      return a - b;
+    });
+
+  let counterTotal = 0;
+
+  currentDespesas.map((item) => {
+    return (counterTotal += item.valor);
   });
 
   return (
@@ -50,6 +63,10 @@ const HeaderComponent = (props: IHeaderProps) => {
             })}
           </Select>
         </FormControl>
+      </Box>
+
+      <Box>
+        <h4>Total counter: {counterTotal.toFixed(2)}</h4>
       </Box>
     </>
   );
