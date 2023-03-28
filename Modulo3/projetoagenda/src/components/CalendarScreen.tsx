@@ -27,7 +27,7 @@ import {
   nextMounth,
 } from "../dateFunctions";
 import { Link, useParams } from "react-router-dom";
-import EventFormDialog from "./EventFormDialog";
+import EventFormDialog, { IEditingEvent } from "./EventFormDialog";
 
 const daysWeek: string[] = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
@@ -91,7 +91,7 @@ const CalendarScreen = () => {
   const [events, setEvents] = useState<IEvent[]>([]);
   const [calendars, setCalendars] = useState<ICalendar[]>([]);
   const [calendarsSelected, setCalendarsSelected] = useState<boolean[]>([]);
-  const [open, setOpen] = useState<boolean>(false);
+  const [editingEvent, setEditingEvent] = useState<IEditingEvent | null>(null);
   const weeks = generateCalendar(
     date + "-01",
     events,
@@ -118,6 +118,14 @@ const CalendarScreen = () => {
     setCalendarsSelected(newValue);
   }
 
+  function openNewEvent() {
+    setEditingEvent({
+      date: getTodayDate(),
+      desc: "",
+      calendarId: calendars[0].id,
+    });
+  }
+
   return (
     <Box display="flex" height="100%" alignItems="stretch">
       <Box
@@ -126,7 +134,7 @@ const CalendarScreen = () => {
         padding="8px 16px"
       >
         <h2>Agenda React</h2>
-        <Button variant="contained" onClick={() => setOpen(true)}>
+        <Button variant="contained" onClick={openNewEvent}>
           Novo Evento
         </Button>
 
@@ -175,7 +183,6 @@ const CalendarScreen = () => {
             </Avatar>
           </IconButton>
         </Box>
-
         <TableContainer style={{ flex: "1" }} component={"div"}>
           <Table aria-label="simple table">
             <TableHead>
@@ -229,8 +236,12 @@ const CalendarScreen = () => {
             </TableBody>
           </Table>
         </TableContainer>
-
-        <EventFormDialog open={open} onClose={() => setOpen(false)} />
+        <EventFormDialog
+          event={editingEvent}
+          calendars={calendars}
+          onClose={() => setEditingEvent(null)}
+        />
+        {/* !! in open props object will return true and null false */}
       </Box>
     </Box>
   );
