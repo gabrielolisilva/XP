@@ -19,6 +19,7 @@ import {
   getCalendarEndPoint,
   IEvent,
   ICalendar,
+  IEditingEvent,
 } from "../backend/backend";
 import {
   formatDate,
@@ -27,7 +28,7 @@ import {
   nextMounth,
 } from "../dateFunctions";
 import { Link, useParams } from "react-router-dom";
-import EventFormDialog, { IEditingEvent } from "./EventFormDialog";
+import EventFormDialog from "./EventFormDialog";
 
 const daysWeek: string[] = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
@@ -111,6 +112,10 @@ const CalendarScreen = () => {
       setEvents(events);
     });
   }, [firstDate, lastDate]);
+
+  function refreshEvents() {
+    getEventsEndPoint(firstDate, lastDate).then(setEvents);
+  }
 
   function toggleCalendar(i: number) {
     const newValue = [...calendarsSelected];
@@ -239,7 +244,11 @@ const CalendarScreen = () => {
         <EventFormDialog
           event={editingEvent}
           calendars={calendars}
-          onClose={() => setEditingEvent(null)}
+          onCancel={() => setEditingEvent(null)}
+          onSave={() => {
+            setEditingEvent(null);
+            refreshEvents();
+          }}
         />
         {/* !! in open props object will return true and null false */}
       </Box>

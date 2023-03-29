@@ -39,6 +39,20 @@
       "time": "13:00",
       "desc": "Entrega do projeto",
       "calendarId": 2
+    },
+    {
+      "date": "2021-08-24",
+      "desc": "Aniversário do João",
+      "calendarId": 1,
+      "time": "16:50",
+      "id": 5
+    },
+    {
+      "date": "2021-06-25",
+      "desc": "Levar cachorro passear",
+      "calendarId": 1,
+      "time": "12:00",
+      "id": 6
     }
   ]
 }
