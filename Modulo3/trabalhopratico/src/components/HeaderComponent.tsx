@@ -5,10 +5,15 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { IHeaderProps } from "../interfaces/interfaces";
 
-import * as _ from "lodash";
-
 const HeaderComponent = (props: IHeaderProps) => {
-  const { allDespesas, currentDespesas } = props;
+  const {
+    allDespesas,
+    currentDespesas,
+    yearInfo,
+    monthInfo,
+    setYearInfo,
+    setMonthInfo,
+  } = props;
   const months = allDespesas.map((item) => {
     return item.mes.slice(0, 4);
   });
@@ -40,7 +45,11 @@ const HeaderComponent = (props: IHeaderProps) => {
       <Box>
         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
           <InputLabel id="selectYear">Ano</InputLabel>
-          <Select value="" labelId="selectYear">
+          <Select
+            value={yearInfo}
+            labelId="selectYear"
+            onChange={(e) => setYearInfo(e.target.value)}
+          >
             {uniqueMonths.map((item) => {
               return (
                 <MenuItem key={item} value={item}>
@@ -53,13 +62,25 @@ const HeaderComponent = (props: IHeaderProps) => {
 
         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
           <InputLabel id="selectYear">Mês</InputLabel>
-          <Select value="" labelId="selectMonth">
+          <Select
+            value={monthInfo}
+            labelId="selectMonth"
+            onChange={(e) => setMonthInfo(e.target.value)}
+          >
             {uniqueDays.map((item) => {
-              return (
-                <MenuItem key={item} value={item}>
-                  {item}
-                </MenuItem>
-              );
+              if (item < 10) {
+                return (
+                  <MenuItem key={`0${item}`} value={`0${item}`}>
+                    {`0${item}`}
+                  </MenuItem>
+                );
+              } else {
+                return (
+                  <MenuItem key={item} value={item}>
+                    {item}
+                  </MenuItem>
+                );
+              }
             })}
           </Select>
         </FormControl>

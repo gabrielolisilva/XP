@@ -7,14 +7,21 @@ import { GetURLParams } from "../services/getURLParams";
 import { IDespesas } from "../interfaces/interfaces";
 
 const DespesasPage = () => {
-  let date = GetURLParams("mes");
-  if (date === "") date = "2020-06";
-
   const [allDespesas, setAllDespesas] = useState<IDespesas[]>([]);
   const [currentDespesas, setCurrentDespesas] = useState<IDespesas[]>([]);
+  const [yearInfo, setYearInfo] = useState("2020");
+  const [monthInfo, setMonthInfo] = useState("06");
+
+  let date = GetURLParams("mes");
+  const [year, month] = date.split("-");
+  if (date === "") {
+    date = `${yearInfo}-${monthInfo}`;
+  }
 
   useEffect(() => {
     async function despesasInfo() {
+      setYearInfo(year);
+      setMonthInfo(month);
       const despesasData = await getDespesas(date);
       setCurrentDespesas(despesasData);
 
@@ -23,7 +30,7 @@ const DespesasPage = () => {
     }
 
     despesasInfo();
-  }, [date]);
+  }, [date, year, month]);
 
   return (
     <Box
@@ -42,6 +49,10 @@ const DespesasPage = () => {
         <HeaderComponent
           allDespesas={allDespesas}
           currentDespesas={currentDespesas}
+          yearInfo={yearInfo}
+          setYearInfo={setYearInfo}
+          monthInfo={monthInfo}
+          setMonthInfo={setMonthInfo}
         />
       </Box>
       <Box flex="1">

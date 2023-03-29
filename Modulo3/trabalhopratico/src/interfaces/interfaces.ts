@@ -10,4 +10,8 @@ export interface IDespesas {
 export interface IHeaderProps {
   allDespesas: IDespesas[];
   currentDespesas: IDespesas[];
+  yearInfo: string;
+  monthInfo: string;
+  setYearInfo: React.Dispatch<React.SetStateAction<string>>;
+  setMonthInfo: React.Dispatch<React.SetStateAction<string>>;
 }
