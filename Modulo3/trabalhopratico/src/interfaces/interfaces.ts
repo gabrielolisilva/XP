@@ -15,3 +15,7 @@ export interface IHeaderProps {
   setYearInfo: React.Dispatch<React.SetStateAction<string>>;
   setMonthInfo: React.Dispatch<React.SetStateAction<string>>;
 }
+
+export interface ITableProps {
+  currentDespesas: IDespesas[];
+}

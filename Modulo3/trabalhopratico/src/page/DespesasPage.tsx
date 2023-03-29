@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { getDespesas } from "../services/getData";
 import HeaderComponent from "../components/HeaderComponent";
 import TableComponent from "../components/TableComponent";
-import { GetURLParams } from "../services/getURLParams";
 import { IDespesas } from "../interfaces/interfaces";
 
 const DespesasPage = () => {
@@ -12,25 +11,21 @@ const DespesasPage = () => {
   const [yearInfo, setYearInfo] = useState("2020");
   const [monthInfo, setMonthInfo] = useState("06");
 
-  let date = GetURLParams("mes");
-  const [year, month] = date.split("-");
-  if (date === "") {
-    date = `${yearInfo}-${monthInfo}`;
-  }
+  let date = `${yearInfo}-${monthInfo}`;
+  console.log(date);
 
   useEffect(() => {
     async function despesasInfo() {
-      setYearInfo(year);
-      setMonthInfo(month);
       const despesasData = await getDespesas(date);
       setCurrentDespesas(despesasData);
+      console.log(currentDespesas);
 
       const allDespesasData = await getDespesas(null);
       setAllDespesas(allDespesasData);
     }
 
     despesasInfo();
-  }, [date, year, month]);
+  }, [date]);
 
   return (
     <Box
@@ -56,7 +51,7 @@ const DespesasPage = () => {
         />
       </Box>
       <Box flex="1">
-        <TableComponent />
+        <TableComponent currentDespesas={currentDespesas} />
       </Box>
     </Box>
   );
