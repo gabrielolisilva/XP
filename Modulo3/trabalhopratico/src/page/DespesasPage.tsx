@@ -12,7 +12,6 @@ const DespesasPage = () => {
   const [monthInfo, setMonthInfo] = useState("06");
 
   let date = `${yearInfo}-${monthInfo}`;
-  console.log(date);
 
   useEffect(() => {
     async function despesasInfo() {
