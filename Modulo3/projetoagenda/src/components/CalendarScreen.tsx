@@ -123,12 +123,27 @@ const CalendarScreen = () => {
     setCalendarsSelected(newValue);
   }
 
-  function openNewEvent() {
+  function openNewEvent(date: string) {
     setEditingEvent({
-      date: getTodayDate(),
+      date,
       desc: "",
       calendarId: calendars[0].id,
     });
+  }
+
+  function updateEvent(event: IEvent) {
+    setEditingEvent(event);
+  }
+
+  function handleCellClick(e: React.MouseEvent, date: string) {
+    if (e.target === e.currentTarget) {
+      openNewEvent(date);
+      console.log("work");
+    }
+  }
+
+  function onClickEvent(event: IEvent) {
+    updateEvent(event);
   }
 
   return (
@@ -139,7 +154,10 @@ const CalendarScreen = () => {
         padding="8px 16px"
       >
         <h2>Agenda React</h2>
-        <Button variant="contained" onClick={openNewEvent}>
+        <Button
+          variant="contained"
+          onClick={() => openNewEvent(getTodayDate())}
+        >
           Novo Evento
         </Button>
 
@@ -203,14 +221,24 @@ const CalendarScreen = () => {
               {weeks.map((week, i) => (
                 <TableRow key={i}>
                   {week.map((cell) => (
-                    <TableCell align="center" key={cell.date}>
+                    <TableCell
+                      align="center"
+                      key={cell.date}
+                      onClick={(mouseEvent) =>
+                        handleCellClick(mouseEvent, cell.date)
+                      }
+                    >
                       <div className="dayOfMonth">{cell.dayOfMonth}</div>
 
                       {cell.events.map((event) => {
                         const color = event.calendar.color;
 
                         return (
-                          <button className="eventButton" key={event.id}>
+                          <button
+                            className="eventButton"
+                            key={event.id}
+                            onClick={() => onClickEvent(event)}
+                          >
                             {event.time && (
                               <>
                                 <Icon style={{ color }} fontSize="inherit">

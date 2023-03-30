@@ -29,9 +29,14 @@
     {
       "id": 3,
       "date": "2021-06-03",
-      "time": "8:00",
+      "time": "09:00",
       "desc": "Consulta ortopedista",
-      "calendarId": 1
+      "calendarId": 1,
+      "calendar": {
+        "id": 1,
+        "name": "Pessoal",
+        "color": "#8E24AA"
+      }
     },
     {
       "id": 4,
@@ -46,13 +51,6 @@
       "calendarId": 1,
       "time": "16:50",
       "id": 5
-    },
-    {
-      "date": "2021-06-25",
-      "desc": "Levar cachorro passear",
-      "calendarId": 1,
-      "time": "12:00",
-      "id": 6
     }
   ]
 }

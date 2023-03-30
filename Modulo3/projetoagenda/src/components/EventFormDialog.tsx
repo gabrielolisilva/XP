@@ -11,8 +11,10 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import {
   createEventEndPoint,
+  deleteEventEndPoint,
   ICalendar,
   IEditingEvent,
+  updateEventEndPoint,
 } from "../backend/backend";
 import { useState, useEffect, useRef } from "react";
 
@@ -39,6 +41,8 @@ export default function EventFormDialog(props: IEventFormDialogProps) {
     setErrors({});
   }, [props.event]);
 
+  const isNew = !event?.id;
+
   function validate(): boolean {
     if (event) {
       const currentErrors: IValidateErrors = {};
@@ -59,8 +63,18 @@ export default function EventFormDialog(props: IEventFormDialogProps) {
   function save(e: React.FormEvent) {
     e.preventDefault();
     if (validate()) {
-      createEventEndPoint(event!).then(props.onSave);
-      /* event can be null to add ! at the end to ensure that he exists */
+      if (isNew) {
+        createEventEndPoint(event!).then(props.onSave);
+        /* event can be null to add ! at the end to ensure that he exists */
+      } else {
+        updateEventEndPoint(event!).then(props.onSave);
+      }
+    }
+  }
+
+  function deleteEvent() {
+    if (event) {
+      deleteEventEndPoint(event.id!).then(props.onSave);
     }
   }
 
@@ -69,7 +83,7 @@ export default function EventFormDialog(props: IEventFormDialogProps) {
       <Dialog open={!!event} onClose={props.onCancel}>
         {/* !!props.event meaning that has an event so it's true */}
         <form onSubmit={save}>
-          <DialogTitle>Criar Evento</DialogTitle>
+          <DialogTitle>{isNew ? "Criar Evento" : "Editar Evento"}</DialogTitle>
           <DialogContent>
             {event && (
               <>
@@ -132,6 +146,7 @@ export default function EventFormDialog(props: IEventFormDialogProps) {
           </DialogContent>
           <DialogActions>
             <Button onClick={props.onCancel}>Cancelar</Button>
+            {!isNew && <Button onClick={deleteEvent}>Excluir</Button>}
             <Button type="submit" color="primary">
               Salvar
             </Button>
