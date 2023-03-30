@@ -6,13 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
-import {
-  Avatar,
-  Checkbox,
-  FormControlLabel,
-  Icon,
-  IconButton,
-} from "@mui/material";
+import { Checkbox, FormControlLabel, Icon, IconButton } from "@mui/material";
 import { useEffect, useState } from "react";
 import {
   getEventsEndPoint,
@@ -20,6 +14,7 @@ import {
   IEvent,
   ICalendar,
   IEditingEvent,
+  IUser,
 } from "../backend/backend";
 import {
   formatDate,
@@ -29,6 +24,7 @@ import {
 } from "../dateFunctions";
 import { Link, useParams } from "react-router-dom";
 import EventFormDialog from "./EventFormDialog";
+import UserMenu from "./UserMenu";
 
 const daysWeek: string[] = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
@@ -87,7 +83,12 @@ function generateCalendar(
   return weeks;
 }
 
-const CalendarScreen = () => {
+interface ICalendarScreenProps {
+  onSignOut: () => void;
+  user: IUser;
+}
+
+const CalendarScreen = (props: ICalendarScreenProps) => {
   const { date } = useParams();
   const [events, setEvents] = useState<IEvent[]>([]);
   const [calendars, setCalendars] = useState<ICalendar[]>([]);
@@ -200,11 +201,7 @@ const CalendarScreen = () => {
           <Box flex="1" marginLeft="16px" component="strong">
             {formatDate(date || getTodayDate())}
           </Box>
-          <IconButton aria-label="Ícone profile">
-            <Avatar>
-              <Icon>person</Icon>
-            </Avatar>
-          </IconButton>
+          <UserMenu user={props.user} onSignOut={props.onSignOut} />
         </Box>
         <TableContainer style={{ flex: "1" }} component={"div"}>
           <Table aria-label="simple table">

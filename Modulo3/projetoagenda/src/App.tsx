@@ -20,8 +20,12 @@ function App() {
 
   useEffect(() => {
     /*.then(setUser) the same as ()=> setUser(user) */
-    getUserEndPoint().then(setUser, () => setUser(null));
+    getUserEndPoint().then(setUser, onSignOut);
   }, []);
+
+  function onSignOut() {
+    setUser(null);
+  }
 
   if (user) {
     return (
@@ -32,7 +36,10 @@ function App() {
               path="*"
               element={<Navigate to={`/calendar/${todayDate}`} />}
             /> */}
-            <Route path="/calendar/:date" element={<CalendarScreen />} />
+            <Route
+              path="/calendar/:date"
+              element={<CalendarScreen user={user} onSignOut={onSignOut} />}
+            />
           </Routes>
         </Router>
       </div>

@@ -99,3 +99,10 @@ export async function signInEndPoint(
     body: JSON.stringify({ email, password }),
   }).then(handleResponse);
 }
+
+export async function signOutEndPoint(): Promise<void> {
+  return await fetch(`http://localhost:3500/auth/logout`, {
+    credentials: "include",
+    method: "POST",
+  }).then(handleResponse);
+}
