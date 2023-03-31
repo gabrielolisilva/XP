@@ -87,7 +87,7 @@ const HeaderComponent = (props: IHeaderProps) => {
       </Box>
 
       <Box>
-        <h4>Total counter: R$ {counterTotal.toFixed(2)}</h4>
+        <h4>Despesa Total: R$ {counterTotal.toFixed(2)}</h4>
       </Box>
     </>
   );

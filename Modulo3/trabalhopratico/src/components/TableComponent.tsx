@@ -10,6 +10,10 @@ import { ITableProps } from "../interfaces/interfaces";
 const TableComponent = (props: ITableProps) => {
   const { currentDespesas } = props;
 
+  function formataValor(n: number): string {
+    return n.toFixed(2).replace(".", ",");
+  }
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -38,7 +42,7 @@ const TableComponent = (props: ITableProps) => {
                   {item.dia}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {item.valor}
+                  {formataValor(item.valor)}
                 </TableCell>
               </TableRow>
             );

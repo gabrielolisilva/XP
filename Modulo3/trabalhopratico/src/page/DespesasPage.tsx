@@ -49,7 +49,7 @@ const DespesasPage = () => {
           setMonthInfo={setMonthInfo}
         />
       </Box>
-      <Box flex="1">
+      <Box flex="1" margin="20px 0px">
         <TableComponent currentDespesas={currentDespesas} />
       </Box>
     </Box>
