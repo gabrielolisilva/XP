@@ -73,6 +73,6 @@ server.use(/^(?!\/sessao).*$/, (req, res, next) => {
 
 server.use(router);
 
-server.listen(3001, () => {
+server.listen(3500, () => {
   console.log(`Servidor inicializado`);
 });

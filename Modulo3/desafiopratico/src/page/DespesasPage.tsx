@@ -4,27 +4,28 @@ import { getDespesas } from "../services/getData";
 import HeaderComponent from "../components/HeaderComponent";
 import TableComponent from "../components/TableComponent";
 import { IDespesas } from "../interfaces/interfaces";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const DespesasPage = () => {
-  const [allDespesas, setAllDespesas] = useState<IDespesas[]>([]);
-  const [currentDespesas, setCurrentDespesas] = useState<IDespesas[]>([]);
-  const [yearInfo, setYearInfo] = useState("2020");
-  const [monthInfo, setMonthInfo] = useState("06");
+  const { anoMes } = useParams();
 
-  let date = `${yearInfo}-${monthInfo}`;
+  const navigate = useNavigate();
+
+  const [currentDespesas, setCurrentDespesas] = useState<IDespesas[]>([]);
 
   useEffect(() => {
     async function despesasInfo() {
-      const despesasData = await getDespesas(date);
+      const despesasData = await getDespesas(anoMes!);
       setCurrentDespesas(despesasData);
-      console.log(currentDespesas);
-
-      const allDespesasData = await getDespesas(null);
-      setAllDespesas(allDespesasData);
     }
 
     despesasInfo();
-  }, [date]);
+  }, [anoMes]);
+
+  function handleDateUpdate(date: string): void {
+    navigate("/despesas/" + date);
+  }
 
   return (
     <Box
@@ -41,12 +42,9 @@ const DespesasPage = () => {
         alignItems="center"
       >
         <HeaderComponent
-          allDespesas={allDespesas}
           currentDespesas={currentDespesas}
-          yearInfo={yearInfo}
-          setYearInfo={setYearInfo}
-          monthInfo={monthInfo}
-          setMonthInfo={setMonthInfo}
+          anoMes={anoMes!}
+          handleDateUpdate={handleDateUpdate}
         />
       </Box>
       <Box flex="1">
