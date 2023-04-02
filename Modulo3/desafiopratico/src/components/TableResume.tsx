@@ -6,39 +6,42 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { ITableProps } from "../interfaces/interfaces";
+import * as _ from "lodash";
 
-const TableComponent = (props: ITableProps) => {
+const TableResume = (props: ITableProps) => {
   const { currentDespesas } = props;
+  const categoriesGrouped = _.groupBy(currentDespesas, "categoria");
+  const categoriesCount = _.sortBy(
+    Object.keys(categoriesGrouped).map((categoryName) => {
+      return {
+        categoria: categoryName,
+        total: _.sumBy(categoriesGrouped[categoryName], "valor").toFixed(2),
+      };
+    }),
+    "categoria"
+  );
 
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Despesa</TableCell>
             <TableCell>Categoria</TableCell>
-            <TableCell>Dia</TableCell>
-            <TableCell>Valor(R$)</TableCell>
+            <TableCell align="right">Valor(R$)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {currentDespesas.map((item) => {
+          {categoriesCount.map((item) => {
             return (
               <TableRow
-                key={item.id}
+                key={item.categoria}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {item.descricao}
-                </TableCell>
-                <TableCell component="th" scope="row">
                   {item.categoria}
                 </TableCell>
-                <TableCell component="th" scope="row">
-                  {item.dia}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {item.valor}
+                <TableCell component="th" scope="row" align="right">
+                  {item.total}
                 </TableCell>
               </TableRow>
             );
@@ -49,4 +52,4 @@ const TableComponent = (props: ITableProps) => {
   );
 };
 
-export default TableComponent;
+export default TableResume;
