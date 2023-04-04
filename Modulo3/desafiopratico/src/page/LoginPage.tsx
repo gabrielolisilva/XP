@@ -11,8 +11,8 @@ interface ILoginScreenProps {
 }
 
 const LoginScreen = (props: ILoginScreenProps) => {
-  const [email, setEmail] = useState("usuario@email.com");
-  const [senha, setSenha] = useState("1234");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
   function signIn(e: React.FormEvent) {
     e.preventDefault();

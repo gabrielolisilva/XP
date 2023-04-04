@@ -17,7 +17,12 @@ export interface ITableProps {
   currentDespesas: IDespesas[];
 }
 
+export interface IHeaderInfoProps {
+  user: IUser | null;
+  onSignOut: () => void;
+}
+
 export interface IUser {
+  nome: string;
   email: string;
-  password: string;
 }
