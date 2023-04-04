@@ -1,6 +1,5 @@
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
-import { getDespesas } from "../services/getData";
 import HeaderComponent from "../components/HeaderComponent";
 import TableComponent from "../components/TableComponent";
 import { IDespesas } from "../interfaces/interfaces";
@@ -10,6 +9,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import TableResume from "../components/TableResume";
+import { getDespesasEndPoint } from "../services/authAPI";
 
 interface ITabPanelProps {
   children?: React.ReactNode;
@@ -57,8 +57,8 @@ const DespesasPage = () => {
 
   useEffect(() => {
     async function despesasInfo() {
-      const despesasData = await getDespesas(anoMes!);
-      setCurrentDespesas(despesasData);
+      const data = await getDespesasEndPoint(anoMes!);
+      setCurrentDespesas(data);
     }
 
     despesasInfo();

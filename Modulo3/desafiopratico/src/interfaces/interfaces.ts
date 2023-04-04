@@ -16,3 +16,8 @@ export interface IHeaderProps {
 export interface ITableProps {
   currentDespesas: IDespesas[];
 }
+
+export interface IUser {
+  email: string;
+  password: string;
+}
