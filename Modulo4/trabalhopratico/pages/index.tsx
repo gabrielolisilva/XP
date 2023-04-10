@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 
 export async function getStaticProps() {
   const data = await fetch("https://fakestoreapi.com/products?limit=10").then(
@@ -14,6 +15,7 @@ export async function getStaticProps() {
 }
 
 export default function Home({ data }: any) {
+  console.log(data);
   return (
     <>
       <Head>
@@ -26,11 +28,13 @@ export default function Home({ data }: any) {
         <h1>Products</h1>
         <div className="productsContainer">
           {data.map((item: any) => (
-            <div className="productContainer" key={item.id}>
-              <h1>{item.title}</h1>
-              <p>{item.description}</p>
-              <p>{item.category}</p>
-            </div>
+            <Link href={`/${item.id}`}>
+              <div className="productContainer" key={item.id}>
+                <h1>{item.title}</h1>
+                <p>{item.description}</p>
+                <p>{item.category}</p>
+              </div>
+            </Link>
           ))}
         </div>
       </main>
