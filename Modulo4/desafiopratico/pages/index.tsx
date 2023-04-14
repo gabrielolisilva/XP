@@ -3,33 +3,56 @@ import Image from "next/image";
 import styles from "@/styles/Home.module.css";
 import { useEffect, useState } from "react";
 
-let pageNumber = 1;
-const urlData = `https://api.coingecko.com/api/v3/exchanges/?per_page=100&page=${pageNumber}`;
+export default function Home() {
+  const [criptoData, setCriptoData] = useState([]);
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [previousButton, setPreviousButton] = useState<boolean>(false);
+  const [nextButton, setNextButton] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>("");
 
-export async function getStaticProps() {
-  const criptoData = await fetch(urlData).then((resp) => resp.json());
-
-  return {
-    props: {
-      criptoData,
-    },
-  };
-}
-
-export default function Home({ criptoData }: any) {
-  const [disableButton, setDisableButton] = useState<boolean>(false);
+  const urlData = `https://api.coingecko.com/api/v3/exchanges/?per_page=100&page=${pageNumber}`;
 
   useEffect(() => {
+    async function getData() {
+      const data = await fetch(urlData).then((resp) => resp.json());
+      setCriptoData(data);
+    }
+
+    getData();
+  }, []);
+
+  useEffect(() => {
+    async function getData() {
+      const data = await fetch(urlData).then((resp) => resp.json());
+      setCriptoData(data);
+    }
+    getData();
+
     function buttonsStatus() {
       if (pageNumber === 1) {
-        setDisableButton(true);
+        setPreviousButton(true);
+      } else if (pageNumber === 5) {
+        setNextButton(true);
+      } else {
+        setPreviousButton(false);
+        setNextButton(false);
       }
     }
     buttonsStatus();
-  }, []);
+
+    function filterItems() {
+      console.log(inputValue);
+    }
+
+    filterItems();
+  }, [pageNumber, inputValue]);
 
   function nextPage() {
-    pageNumber++;
+    setPageNumber((prev) => prev + 1);
+  }
+
+  function previousPage() {
+    setPageNumber((prev) => prev - 1);
   }
 
   return (
@@ -42,19 +65,21 @@ export default function Home({ criptoData }: any) {
       </Head>
       <div>
         <div className={styles.buttonsDiv}>
-          <button
-            disabled={disableButton}
-            onClick={() => {
-              pageNumber--;
-            }}
-          >
+          <button disabled={previousButton} onClick={previousPage}>
             Página Anterior
           </button>
-          <button onClick={nextPage}>Próxima Página</button>
+          <button disabled={nextButton} onClick={nextPage}>
+            Próxima Página
+          </button>
         </div>
 
         <div className={styles.searchDiv}>
-          <input type="text" placeholder="Filtrar por nome" />
+          <input
+            type="text"
+            placeholder="Filtrar por nome"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
         </div>
 
         <div className={styles.summaryDiv}>
