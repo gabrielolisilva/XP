@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
+import { useEffect, useState } from "react";
 
 let pageNumber = 1;
 const urlData = `https://api.coingecko.com/api/v3/exchanges/?per_page=100&page=${pageNumber}`;
@@ -16,7 +17,21 @@ export async function getStaticProps() {
 }
 
 export default function Home({ criptoData }: any) {
-  console.log(criptoData);
+  const [disableButton, setDisableButton] = useState<boolean>(false);
+
+  useEffect(() => {
+    function buttonsStatus() {
+      if (pageNumber === 1) {
+        setDisableButton(true);
+      }
+    }
+    buttonsStatus();
+  }, []);
+
+  function nextPage() {
+    pageNumber++;
+  }
+
   return (
     <>
       <Head>
@@ -27,8 +42,15 @@ export default function Home({ criptoData }: any) {
       </Head>
       <div>
         <div className={styles.buttonsDiv}>
-          <button>Página Anterior</button>
-          <button>Próxima Página</button>
+          <button
+            disabled={disableButton}
+            onClick={() => {
+              pageNumber--;
+            }}
+          >
+            Página Anterior
+          </button>
+          <button onClick={nextPage}>Próxima Página</button>
         </div>
 
         <div className={styles.searchDiv}>
@@ -41,7 +63,7 @@ export default function Home({ criptoData }: any) {
 
         <ul className={styles.itemsContainer}>
           {criptoData.map((item: any) => (
-            <li>
+            <li key={item.id}>
               <div className={styles.imageNameContainer}>
                 <Image
                   src={item.image}
