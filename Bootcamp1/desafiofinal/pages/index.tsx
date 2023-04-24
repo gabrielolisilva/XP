@@ -1,10 +1,11 @@
 import Head from "next/head";
+import { useEffect, useState } from "react";
+
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useEffect, useState } from "react";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -13,10 +14,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import dataOrganization from "@/helpers/helpers";
 
 export default function Home() {
-  const [currentTableInfo, setCurrentTableInfo] = useState([]);
-  const [year, setYear] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentTableInfo, setCurrentTableInfo] = useState<any>([]);
+  const [year, setYear] = useState("2003");
   const handleChange = (event: SelectChangeEvent) => {
     setYear(event.target.value as string);
   };
@@ -28,6 +31,18 @@ export default function Home() {
 
   useEffect(() => {
     console.log(year);
+
+    async function getData() {
+      const data = await fetch(`http://localhost:3500/${year}`).then((resp) =>
+        resp.json()
+      );
+      /* console.log(data); */
+      const dataOrganized = dataOrganization(data);
+      setCurrentTableInfo(dataOrganized);
+      setIsLoading(false);
+      console.log(currentTableInfo);
+    }
+    getData();
   }, [year]);
 
   return (
@@ -51,7 +66,6 @@ export default function Home() {
               label="Ano"
               onChange={handleChange}
             >
-              <MenuItem value={0}>...</MenuItem>
               {YEARS.map((year) => (
                 <MenuItem key={year} value={year}>
                   {year}
@@ -62,24 +76,43 @@ export default function Home() {
         </Box>
       </header>
 
-      <main className="px-28 mt-10">
-        <TableContainer component={Paper}>
-          <Table style={{ width: 800 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center"></TableCell>
-                <TableCell align="center">P</TableCell>
-                <TableCell align="center">V</TableCell>
-                <TableCell align="center">E</TableCell>
-                <TableCell align="center">D</TableCell>
-                <TableCell align="center">GP</TableCell>
-                <TableCell align="center">GC</TableCell>
-                <TableCell align="center">S</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody></TableBody>
-          </Table>
-        </TableContainer>
+      <main className="px-20 mt-10">
+        {isLoading ? (
+          <div className="text-center text-2xl">Carregando...</div>
+        ) : (
+          <TableContainer component={Paper} style={{ marginBottom: 50 }}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center"></TableCell>
+                  <TableCell align="center">P</TableCell>
+                  <TableCell align="center">V</TableCell>
+                  <TableCell align="center">E</TableCell>
+                  <TableCell align="center">D</TableCell>
+                  <TableCell align="center">GP</TableCell>
+                  <TableCell align="center">GC</TableCell>
+                  <TableCell align="center">S</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {currentTableInfo.map((team: any) => (
+                  <TableRow key={team.time}>
+                    <TableCell component="th" scope="row">
+                      {team.time}
+                    </TableCell>
+                    <TableCell align="center">{team.pontos}</TableCell>
+                    <TableCell align="center">{team.vitórias}</TableCell>
+                    <TableCell align="center">{team.empates}</TableCell>
+                    <TableCell align="center">{team.derrotas}</TableCell>
+                    <TableCell align="center">{team.gols_Pros}</TableCell>
+                    <TableCell align="center">{team.gols_Contra}</TableCell>
+                    <TableCell align="center">{team.saldo_Gols}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
       </main>
     </div>
   );
