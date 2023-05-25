@@ -1,6 +1,7 @@
 import express from "express";
 const router = express.Router();
 import { promises as fs } from "fs";
+import _ from "lodash";
 
 router.post("/adicionar", async (req, res) => {
   try {
@@ -92,6 +93,111 @@ router.delete("/deletar/:id", async (req, res) => {
     jsonData.nextId--;
     fs.writeFile("./data/pedidos.json", JSON.stringify(jsonData));
     res.send({ msg: "Item excluído!" });
+  } catch (error) {
+    res.status(400).send({ error: err.message });
+  }
+});
+
+router.get("/consultar/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await fs.readFile("./data/pedidos.json");
+    const jsonData = JSON.parse(data);
+
+    const selectedItem = jsonData.pedidos.find((item) => {
+      return item.id === parseInt(id);
+    });
+
+    res.send(selectedItem);
+  } catch (error) {
+    res.status(400).send({ error: err.message });
+  }
+});
+
+router.get("/valorTotalCliente/:cliente", async (req, res) => {
+  try {
+    const { cliente } = req.params;
+    const data = await fs.readFile("./data/pedidos.json");
+    const jsonData = JSON.parse(data);
+
+    const userOrders = jsonData.pedidos.filter((items) => {
+      return items.cliente === cliente && items.entregue === true;
+    });
+
+    let totalSum = 0;
+    userOrders.map((order) => {
+      totalSum += order.valor;
+    });
+
+    const formatedData = [
+      ...userOrders,
+      { totalGasto: `R$ ${totalSum.toFixed(2)}` },
+    ];
+
+    res.send(formatedData);
+  } catch (error) {
+    res.status(400).send({ error: err.message });
+  }
+});
+
+router.get("/valorTotalProduto/:produto", async (req, res) => {
+  try {
+    const { produto } = req.params;
+    const data = await fs.readFile("./data/pedidos.json");
+    const jsonData = JSON.parse(data);
+
+    const productsOrders = jsonData.pedidos.filter((items) => {
+      return items.produto === produto && items.entregue === true;
+    });
+
+    let totalSum = 0;
+    productsOrders.map((order) => {
+      totalSum += order.valor;
+    });
+
+    const formatedData = [
+      ...productsOrders,
+      { totalGasto: `R$ ${totalSum.toFixed(2)}` },
+    ];
+
+    res.send(formatedData);
+  } catch (error) {
+    res.status(400).send({ error: err.message });
+  }
+});
+
+router.get("/maisVendidos", async (req, res) => {
+  try {
+    const data = await fs.readFile("./data/pedidos.json");
+    const jsonData = JSON.parse(data);
+
+    const pizzasNames = [];
+    jsonData.pedidos.map((order) => {
+      if (pizzasNames.includes(order.produto)) {
+        return;
+      } else {
+        pizzasNames.push(order.produto);
+      }
+    });
+
+    const pizzasInfo = [];
+
+    for (const pizza of pizzasNames) {
+      const totalOrders = jsonData.pedidos.filter((orders) => {
+        return orders.produto === pizza && orders.entregue === true;
+      });
+
+      pizzasInfo.push({ pizzaName: pizza, totalOrder: totalOrders.length });
+    }
+
+    const orderedPizzaInfo = _.orderBy(pizzasInfo, ["totalOrder"], ["desc"]);
+
+    const finalDataFormated = [];
+    orderedPizzaInfo.map((item) => {
+      finalDataFormated.push(`${item.pizzaName} - ${item.totalOrder}`);
+    });
+
+    res.send(finalDataFormated);
   } catch (error) {
     res.status(400).send({ error: err.message });
   }
