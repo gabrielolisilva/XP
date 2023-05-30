@@ -12,8 +12,8 @@
     {
       "id": 2,
       "cliente": "Tália Simas",
-      "produto": "Pizza de chocolate",
-      "valor": 20,
+      "produto": "Pizza Napolitana",
+      "valor": 28,
       "entregue": true,
       "timestamp": "2021-05-02T19:48:09.765Z"
     },
