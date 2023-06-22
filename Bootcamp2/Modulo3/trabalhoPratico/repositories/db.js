@@ -7,7 +7,7 @@ const connect = () => {
 
   const pool = new pg.Pool({
     connectionString:
-      "postgres://qrdtnxhs:e9xOVlTG0ok_5U3jgEnAffpBObe08l9b@silly.db.elephantsql.com/qrdtnxhs",
+      "",
   });
   global.connection = pool;
   return pool.connect();
