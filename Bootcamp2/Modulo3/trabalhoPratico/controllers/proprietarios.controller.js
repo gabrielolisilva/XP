@@ -6,7 +6,7 @@ import {
   getProprietarioService,
 } from "../services/proprietarios.service.js";
 
-const createProprietariosController = (req, res, next) => {
+const createProprietariosController = async (req, res, next) => {
   const proprietario = req.body;
 
   try {
@@ -20,7 +20,7 @@ const createProprietariosController = (req, res, next) => {
   }
 };
 
-const updateProprietariosController = (req, res, next) => {
+const updateProprietariosController = async (req, res, next) => {
   const proprietario = req.body;
 
   try {
@@ -38,7 +38,7 @@ const updateProprietariosController = (req, res, next) => {
   }
 };
 
-const deleteProprietarioController = (req, res, next) => {
+const deleteProprietarioController = async (req, res, next) => {
   const { proprietario_id } = req.params;
 
   try {
@@ -52,13 +52,14 @@ const deleteProprietarioController = (req, res, next) => {
   }
 };
 
-const getProprietariosController = (req, res, next) => {
+const getProprietariosController = async (req, res, next) => {
   try {
     if (req.method !== "GET") {
       res.status(400).send({ msg: "Método incorreto" });
     }
 
-    res.send(getProprietariosService());
+    const result = await getProprietariosService();
+    res.send(result);
   } catch (err) {
     console.log(err);
   }

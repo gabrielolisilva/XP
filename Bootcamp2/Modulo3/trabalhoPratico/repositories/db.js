@@ -6,8 +6,7 @@ const connect = () => {
   }
 
   const pool = new pg.Pool({
-    connectionString:
-      "",
+    connectionString: "",
   });
   global.connection = pool;
   return pool.connect();
