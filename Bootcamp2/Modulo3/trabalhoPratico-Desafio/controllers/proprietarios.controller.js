@@ -25,7 +25,7 @@ const updateProprietariosController = async (req, res, next) => {
 
   try {
     if (
-      !proprietario.proprietario_id ||
+      !proprietario.proprietarioId ||
       !proprietario.nome ||
       !proprietario.telefone
     ) {
@@ -39,14 +39,14 @@ const updateProprietariosController = async (req, res, next) => {
 };
 
 const deleteProprietarioController = async (req, res, next) => {
-  const { proprietario_id } = req.params;
+  const { proprietarioId } = req.params;
 
   try {
-    if (!proprietario_id) {
+    if (!proprietarioId) {
       res.status(400).send({ msg: "ID nessário para exclusão" });
     }
 
-    res.send(deleteProprietarioService(proprietario_id));
+    res.send(deleteProprietarioService(proprietarioId));
   } catch (err) {
     console.log(err);
   }
@@ -66,14 +66,14 @@ const getProprietariosController = async (req, res, next) => {
 };
 
 const getProprietarioController = async (req, res, next) => {
-  const { proprietario_id } = req.params;
+  const { proprietarioId } = req.params;
 
   try {
     if (req.method !== "GET") {
       res.status(400).send({ msg: "Método incorreto" });
     }
 
-    const result = await getProprietarioService(proprietario_id);
+    const result = await getProprietarioService(proprietarioId);
     res.send(result);
   } catch (err) {
     console.log(err);

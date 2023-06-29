@@ -39,14 +39,14 @@ const updateAnimalController = async (req, res, next) => {
 };
 
 const deleteAnimalController = async (req, res, next) => {
-  const { animal_id } = req.params;
+  const { animalId } = req.params;
 
   try {
-    if (!animal_id) {
+    if (!animalId) {
       res.status(400).send({ msg: "ID nessário para exclusão" });
     }
 
-    res.send(deleteAnimalService(animal_id));
+    res.send(deleteAnimalService(animalId));
   } catch (err) {
     console.log(err);
   }
@@ -66,14 +66,14 @@ const getAnimaisController = async (req, res, next) => {
 };
 
 const getAnimalController = async (req, res, next) => {
-  const { animal_id } = req.params;
+  const { animalId } = req.params;
 
   try {
     if (req.method !== "GET") {
       res.status(400).send({ msg: "Método incorreto" });
     }
 
-    const result = await getAnimalService(animal_id);
+    const result = await getAnimalService(animalId);
     res.send(result);
   } catch (err) {
     console.log(err);
