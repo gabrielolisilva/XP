@@ -2,6 +2,7 @@ import {
   createVendaService,
   updateVendaService,
   deleteVendaService,
+  getAutorSellerService,
   getVendasService,
   getVendaService,
 } from "../services/vendas.service.js";
@@ -35,17 +36,27 @@ const updateVendaController = async (req, res, next) => {
 };
 
 const deleteVendaController = async (req, res, next) => {
-  const { livroId } = req.params;
+  const { vendaId } = req.params;
 
   try {
-    if (!livroId) {
+    if (!vendaId) {
       res.status(400).send({ msg: "ID necessário para exclusão" });
     }
 
-    res.send(deleteVendaService(livroId));
+    res.send(deleteVendaService(vendaId));
   } catch (err) {
     console.log(err);
   }
+};
+
+const getAutorSellerController = async (req, res, next) => {
+  const { autorId } = req.query;
+
+  if (!autorId) {
+    res.status(400).send({ msg: "ID necessário para exclusão" });
+  }
+
+  res.send(getAutorSellerService(autorId));
 };
 
 const getVendasController = async (req, res, next) => {
@@ -62,14 +73,14 @@ const getVendasController = async (req, res, next) => {
 };
 
 const getVendaController = async (req, res, next) => {
-  const { livroId } = req.params;
+  const { vendaId } = req.params;
 
   try {
     if (req.method !== "GET") {
       res.status(400).send({ msg: "Método incorreto" });
     }
 
-    const result = await getVendaService(livroId);
+    const result = await getVendaService(vendaId);
     res.send(result);
   } catch (err) {
     console.log(err);
@@ -80,6 +91,7 @@ export {
   createVendaController,
   updateVendaController,
   deleteVendaController,
+  getAutorSellerController,
   getVendasController,
   getVendaController,
 };

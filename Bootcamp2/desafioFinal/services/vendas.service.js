@@ -2,6 +2,7 @@ import {
   insertVendaRepository,
   updateVendaRepository,
   deleteVendaRepository,
+  getAutorSellerRepository,
   getVendasRepository,
   getVendaRepository,
 } from "../repositories/vendas.repositories.js";
@@ -18,6 +19,10 @@ const deleteVendaService = (id) => {
   return deleteVendaRepository(id);
 };
 
+const getAutorSellerService = (autorId) => {
+  return getAutorSellerRepository(autorId);
+};
+
 const getVendasService = () => {
   return getVendasRepository();
 };
@@ -30,6 +35,7 @@ export {
   createVendaService,
   updateVendaService,
   deleteVendaService,
+  getAutorSellerService,
   getVendasService,
   getVendaService,
 };

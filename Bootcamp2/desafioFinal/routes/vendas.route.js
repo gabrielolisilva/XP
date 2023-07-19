@@ -8,12 +8,14 @@ import {
   deleteVendaController,
   getVendasController,
   getVendaController,
+  getAutorSellerController,
 } from "../controllers/vendas.controller.js";
 
 router.post("/", createVendaController);
 router.put("/", updateVendaController);
-router.delete("/:livroId", deleteVendaController);
+router.delete("/:vendaId", deleteVendaController);
+router.get("/", getAutorSellerController);
 router.get("/", getVendasController);
-router.get("/:livroId", getVendaController);
+router.get("/:vendaId", getVendaController);
 
 export default router;
